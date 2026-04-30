@@ -300,6 +300,12 @@ var Radio = ({ label, value, selected, onChange, className = "" }) => {
   ] });
 };
 var radio_default = Radio;
+
+// src/forms/inputstyles.ts
+var inputBase = "border border-edge-subtle/20 rounded-xl w-full text-sm px-3 py-2 text-ink-primary placeholder:text-ink-tertiary/25";
+var inputEditable = "bg-surface-0 focus:ring-2 focus:ring-brand/30 focus:border-brand/60 transition-all duration-200 outline-none";
+var inputReadOnly = "bg-surface-1 border-edge-subtle/15 cursor-default text-ink-tertiary";
+var disabledEffect = "opacity-40";
 var Select = ({ label, value, placeholder, options, className = "", onChange }) => {
   useEffect(() => {
     if (options.length === 1 && value !== options[0].value) {
@@ -311,12 +317,12 @@ var Select = ({ label, value, placeholder, options, className = "", onChange }) 
     {
       value: value || "",
       onChange: (e) => onChange(e.target.value),
-      className: `border border-edge-subtle/20 rounded-xl w-full text-base px-4 py-3 appearance-none ${value ? "text-ink-primary" : "text-ink-tertiary"} bg-surface-0 focus:ring-2 focus:ring-brand/30 focus:border-brand/60 outline-none transition-all duration-300 cursor-pointer`,
+      className: `${inputBase} ${inputEditable} appearance-none cursor-pointer pr-9 ${value ? "text-ink-primary" : "text-ink-tertiary"}`,
       style: {
         backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-        backgroundPosition: "right 1rem center",
+        backgroundPosition: "right 0.75rem center",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "1.5em 1.5em"
+        backgroundSize: "1.25em 1.25em"
       },
       children: [
         placeholder && /* @__PURE__ */ jsx("option", { value: "", disabled: true, children: placeholder }),
@@ -336,12 +342,6 @@ var ComputedField = ({ label, value, suffix, className = "" }) => {
   ] });
 };
 var computedfield_default = ComputedField;
-
-// src/forms/inputstyles.ts
-var inputBase = "border border-edge-subtle/20 rounded-xl w-full text-sm px-3 py-2 text-ink-primary placeholder:text-ink-tertiary/25";
-var inputEditable = "bg-surface-0 focus:ring-2 focus:ring-brand/30 focus:border-brand/60 transition-all duration-200 outline-none";
-var inputReadOnly = "bg-surface-1 border-edge-subtle/15 cursor-default text-ink-tertiary";
-var disabledEffect = "opacity-40";
 var NumberField = ({ label, value, onChange, suffix, step = "any", readOnly }) => {
   return /* @__PURE__ */ jsxs("div", { children: [
     /* @__PURE__ */ jsx(label_default, { text: label, className: "mb-1" }),

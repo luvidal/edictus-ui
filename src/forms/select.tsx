@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import FieldWrapper from './fieldwrapper'
+import { inputBase, inputEditable } from './inputstyles'
 
 interface Props {
   label?: string
@@ -23,12 +24,12 @@ const Select = ({ label, value, placeholder, options, className = '', onChange }
       <select
         value={value || ''}
         onChange={(e) => onChange(e.target.value)}
-        className={`border border-edge-subtle/20 rounded-xl w-full text-base px-4 py-3 appearance-none ${value ? 'text-ink-primary' : 'text-ink-tertiary'} bg-surface-0 focus:ring-2 focus:ring-brand/30 focus:border-brand/60 outline-none transition-all duration-300 cursor-pointer`}
+        className={`${inputBase} ${inputEditable} appearance-none cursor-pointer pr-9 ${value ? 'text-ink-primary' : 'text-ink-tertiary'}`}
         style={{
           backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-          backgroundPosition: 'right 1rem center',
+          backgroundPosition: 'right 0.75rem center',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '1.5em 1.5em'
+          backgroundSize: '1.25em 1.25em'
         }}
       >
         {placeholder && (
