@@ -1291,25 +1291,31 @@ var ContextMenu = ({ open, position, items, onClose }) => {
           pointerEvents: isVisible ? "auto" : "none"
         },
         onMouseDown: (e) => e.stopPropagation(),
-        children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex flex-col gap-px p-1", children: items.map((item, i) => item.type === "separator" ? /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-px bg-white/10 my-1 mx-2" }, i) : /* @__PURE__ */ jsxRuntime.jsxs(
-          "button",
-          {
-            type: "button",
-            disabled: item.disabled,
-            className: `w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-white/80 hover:text-white ${item.disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-black/20"}`,
-            onClick: (e) => {
-              e.stopPropagation();
-              if (item.disabled) return;
-              onClose();
-              item.action?.();
+        children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex flex-col gap-px p-1", children: items.map((item, i) => {
+          if (item.type === "separator") {
+            return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-px bg-white/10 my-1 mx-2" }, i);
+          }
+          const variantClass = item.variant === "red" ? "text-red-400 hover:text-red-300" : item.variant === "amber" ? "text-amber-400 hover:text-amber-300" : "text-white/80 hover:text-white";
+          return /* @__PURE__ */ jsxRuntime.jsxs(
+            "button",
+            {
+              type: "button",
+              disabled: item.disabled,
+              className: `w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left ${variantClass} ${item.disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-black/20"}`,
+              onClick: (e) => {
+                e.stopPropagation();
+                if (item.disabled) return;
+                onClose();
+                item.action?.();
+              },
+              children: [
+                item.icon && /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: item.icon, size: 16 }),
+                /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm", children: item.label })
+              ]
             },
-            children: [
-              item.icon && /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: item.icon, size: 16 }),
-              /* @__PURE__ */ jsxRuntime.jsx("span", { className: "text-sm", children: item.label })
-            ]
-          },
-          i
-        )) })
+            i
+          );
+        }) })
       }
     ),
     document.body

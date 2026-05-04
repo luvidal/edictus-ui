@@ -85,15 +85,20 @@ const ContextMenu = ({ open, position, items, onClose }: Props) => {
       onMouseDown={e => e.stopPropagation()}
     >
       <div className='flex flex-col gap-px p-1'>
-        {items.map((item, i) => (
-          item.type === 'separator' ? (
-            <div key={i} className='h-px bg-white/10 my-1 mx-2' />
-          ) : (
+        {items.map((item, i) => {
+          if (item.type === 'separator') {
+            return <div key={i} className='h-px bg-white/10 my-1 mx-2' />
+          }
+          const variantClass =
+            item.variant === 'red'   ? 'text-red-400 hover:text-red-300'     :
+            item.variant === 'amber' ? 'text-amber-400 hover:text-amber-300' :
+                                       'text-white/80 hover:text-white'
+          return (
             <button
               key={i}
               type='button'
               disabled={item.disabled}
-              className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left text-white/80 hover:text-white ${
+              className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left ${variantClass} ${
                 item.disabled ? 'opacity-40 cursor-not-allowed' : 'hover:bg-black/20'
               }`}
               onClick={e => {
@@ -107,7 +112,7 @@ const ContextMenu = ({ open, position, items, onClose }: Props) => {
               <span className='text-sm'>{item.label}</span>
             </button>
           )
-        ))}
+        })}
       </div>
     </div>,
     document.body
