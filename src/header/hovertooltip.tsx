@@ -16,7 +16,7 @@ const HoverTooltip = ({ label, btnRef }: { label: string; btnRef: RefObject<HTML
 
     return createPortal(
         <span
-            className='fixed pointer-events-none z-50 px-2 py-0.5 rounded text-[11px] whitespace-nowrap bg-gray-900 text-white shadow-lg -translate-x-1/2'
+            className='fixed pointer-events-none z-[10000] px-2 py-0.5 rounded text-[11px] whitespace-nowrap bg-gray-900 text-white shadow-lg -translate-x-1/2'
             style={{ top: pos.top, left: pos.left }}
         >
             {label}
