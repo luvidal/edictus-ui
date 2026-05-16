@@ -1,29 +1,33 @@
-import Label from '../common/label'
+import FieldWrapper from './fieldwrapper'
+import { FieldProps } from './fieldprops'
 import { inputBase, inputEditable, inputReadOnly } from './inputstyles'
 
-interface SelectFieldProps {
-  label: string
-  value: string | undefined
+interface SelectFieldProps extends FieldProps<string> {
   options: { label: string; value: string }[]
-  onChange?: (v: string | undefined) => void
-  readOnly?: boolean
 }
 
-const SelectField = ({ label, value, options, onChange, readOnly }: SelectFieldProps) => {
-  return (
-    <div>
-      <Label text={label} className='mb-1' />
-      <select
-        value={value ?? ''}
-        disabled={readOnly}
-        onChange={readOnly ? undefined : e => onChange?.(e.target.value || undefined)}
-        className={`${inputBase} ${readOnly ? inputReadOnly : inputEditable}`}
-      >
-        <option value="">—</option>
-        {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
-      </select>
-    </div>
-  )
-}
+const SelectField = ({
+  label,
+  tooltip,
+  value,
+  options,
+  onChange,
+  readOnly,
+  placeholder = '—',
+  className,
+  visible,
+}: SelectFieldProps) => (
+  <FieldWrapper label={label} tooltip={tooltip} className={className} visible={visible}>
+    <select
+      value={value ?? ''}
+      disabled={readOnly}
+      onChange={readOnly ? undefined : e => onChange?.(e.target.value || undefined)}
+      className={`${inputBase} ${readOnly ? inputReadOnly : inputEditable}`}
+    >
+      <option value="">{placeholder}</option>
+      {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+    </select>
+  </FieldWrapper>
+)
 
 export default SelectField

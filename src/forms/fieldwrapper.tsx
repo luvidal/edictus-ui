@@ -15,7 +15,7 @@ export default function FieldWrapper({ label, tooltip, className = '', visible =
 
     return (
         <div className={`mb-2 ${className}`}>
-            {label && <Label text={label} tooltip={tooltip} />}
+            {label && <Label text={label} tooltip={tooltip} className="mb-1" />}
             {children}
         </div>
     )

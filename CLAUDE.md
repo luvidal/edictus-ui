@@ -136,3 +136,18 @@ onIconClick?: () => void // if provided → interactive; if absent → decorativ
 - When icon is present, input gets `pr-8` automatically to avoid text overlap
 - Input wrapped in `<div className="relative">` when icon is set (same pattern as NumberField's suffix)
 - Backward compatible — callers that don't pass `icon` see no change
+
+## Field components — shared contract
+
+`TextField`, `NumberField`, `Select`, `SelectField`, `ComputedField` all extend `FieldProps<T>` from `forms/fieldprops.ts`:
+
+```ts
+{ label?, tooltip?, value?, onChange?, readOnly?, placeholder?, className?, visible? }
+```
+
+Rules:
+- All five route through `FieldWrapper` for label + tooltip + className + visible. Do not render `<Label>` directly in a new field — extend `FieldWrapper`.
+- `FieldWrapper` renders the `<Label>` with `mb-1` (4px gap to the input). Never override.
+- `label` is always optional. Pass nothing to render a label-less field.
+- `onChange` is always optional. `TextField` and `Select` emit `(v: string) => void` (sanitized — never undefined); `NumberField` and `SelectField` emit `(v: T | undefined) => void` (undefined when cleared).
+- `ComputedField` is display-only — omits `onChange`, `readOnly`, `placeholder`.

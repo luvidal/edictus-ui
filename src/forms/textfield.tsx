@@ -1,17 +1,12 @@
 import { useState, useEffect } from 'react'
 import Icon from '../common/icon'
 import FieldWrapper from './fieldwrapper'
+import { FieldProps } from './fieldprops'
 import { inputBase, inputEditable, inputReadOnly } from './inputstyles'
 
-interface Props {
-  label?: string
-  tooltip?: string
-  value?: string
+interface Props extends Omit<FieldProps<string>, 'onChange'> {
+  /** TextField commits a sanitized string — never undefined. */
   onChange?: (v: string) => void
-  readOnly?: boolean
-  placeholder?: string
-  className?: string
-  visible?: boolean
   fullWidth?: boolean
   icon?: string
   onIconClick?: () => void

@@ -224,7 +224,7 @@ var label_default = Label;
 function FieldWrapper({ label, tooltip, className = "", visible = true, children }) {
   if (!visible) return null;
   return /* @__PURE__ */ jsxs("div", { className: `mb-2 ${className}`, children: [
-    label && /* @__PURE__ */ jsx(label_default, { text: label, tooltip }),
+    label && /* @__PURE__ */ jsx(label_default, { text: label, tooltip, className: "mb-1" }),
     children
   ] });
 }
@@ -306,19 +306,30 @@ var inputBase = "border border-edge-subtle/20 rounded-xl w-full text-sm px-3 py-
 var inputEditable = "bg-surface-0 focus:ring-2 focus:ring-brand/30 focus:border-brand/60 transition-all duration-200 outline-none";
 var inputReadOnly = "bg-surface-1 border-edge-subtle/15 cursor-default text-ink-tertiary";
 var disabledEffect = "opacity-40";
-var Select = ({ label, value, placeholder, options, className = "", onChange }) => {
+var Select = ({
+  label,
+  tooltip,
+  value,
+  placeholder,
+  options,
+  className,
+  readOnly,
+  visible,
+  onChange
+}) => {
   useEffect(() => {
-    if (options.length === 1 && value !== options[0].value) {
-      onChange(options[0].value);
+    if (!readOnly && options.length === 1 && value !== options[0].value) {
+      onChange?.(options[0].value);
     }
-  }, [options, value, onChange]);
-  return /* @__PURE__ */ jsx(FieldWrapper, { label, className, children: /* @__PURE__ */ jsxs(
+  }, [options, value, onChange, readOnly]);
+  return /* @__PURE__ */ jsx(FieldWrapper, { label, tooltip, className, visible, children: /* @__PURE__ */ jsxs(
     "select",
     {
       value: value || "",
-      onChange: (e) => onChange(e.target.value),
-      className: `${inputBase} ${inputEditable} appearance-none cursor-pointer pr-9 ${value ? "text-ink-primary" : "text-ink-tertiary"}`,
-      style: {
+      disabled: readOnly,
+      onChange: readOnly ? void 0 : (e) => onChange?.(e.target.value),
+      className: `${inputBase} ${readOnly ? inputReadOnly : inputEditable} appearance-none ${readOnly ? "" : "cursor-pointer"} pr-9 ${value ? "text-ink-primary" : "text-ink-tertiary"}`,
+      style: readOnly ? void 0 : {
         backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
         backgroundPosition: "right 0.75rem center",
         backgroundRepeat: "no-repeat",
@@ -332,39 +343,39 @@ var Select = ({ label, value, placeholder, options, className = "", onChange }) 
   ) });
 };
 var select_default = Select;
-var ComputedField = ({ label, value, suffix, className = "" }) => {
-  return /* @__PURE__ */ jsxs("div", { className, children: [
-    label && /* @__PURE__ */ jsx(label_default, { text: label, className: "mb-1" }),
-    /* @__PURE__ */ jsxs("div", { className: "relative", children: [
-      /* @__PURE__ */ jsx("div", { className: "border border-dashed border-edge-subtle/30 rounded-xl w-full text-sm px-3 py-2 tabular-nums bg-surface-0 text-ink-primary font-medium cursor-default select-none", children: value }),
-      suffix && /* @__PURE__ */ jsx("span", { className: "absolute right-3 top-1/2 -translate-y-1/2 text-xs text-ink-tertiary pointer-events-none", children: suffix })
-    ] })
-  ] });
-};
+var ComputedField = ({ label, tooltip, value = "", suffix, className, visible }) => /* @__PURE__ */ jsx(FieldWrapper, { label, tooltip, className, visible, children: /* @__PURE__ */ jsxs("div", { className: "relative", children: [
+  /* @__PURE__ */ jsx("div", { className: "border border-dashed border-edge-subtle/30 rounded-xl w-full text-sm px-3 py-2 tabular-nums bg-surface-0 text-ink-primary font-medium cursor-default select-none", children: value }),
+  suffix && /* @__PURE__ */ jsx("span", { className: "absolute right-3 top-1/2 -translate-y-1/2 text-xs text-ink-tertiary pointer-events-none", children: suffix })
+] }) });
 var computedfield_default = ComputedField;
-var NumberField = ({ label, value, onChange, suffix, step = "any", readOnly }) => {
-  return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx(label_default, { text: label, className: "mb-1" }),
-    /* @__PURE__ */ jsxs("div", { className: "relative", children: [
-      /* @__PURE__ */ jsx(
-        "input",
-        {
-          type: "number",
-          step,
-          value: value ?? "",
-          readOnly,
-          tabIndex: readOnly ? -1 : void 0,
-          onChange: readOnly ? void 0 : (e) => {
-            const raw = e.target.value;
-            onChange?.(raw === "" ? void 0 : Number(raw));
-          },
-          className: `${inputBase} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${readOnly ? inputReadOnly : inputEditable}`
-        }
-      ),
-      suffix && /* @__PURE__ */ jsx("span", { className: "absolute right-3 top-1/2 -translate-y-1/2 text-xs text-ink-tertiary pointer-events-none", children: suffix })
-    ] })
-  ] });
-};
+var NumberField = ({
+  label,
+  tooltip,
+  value,
+  onChange,
+  suffix,
+  step = "any",
+  readOnly,
+  className,
+  visible
+}) => /* @__PURE__ */ jsx(FieldWrapper, { label, tooltip, className, visible, children: /* @__PURE__ */ jsxs("div", { className: "relative", children: [
+  /* @__PURE__ */ jsx(
+    "input",
+    {
+      type: "number",
+      step,
+      value: value ?? "",
+      readOnly,
+      tabIndex: readOnly ? -1 : void 0,
+      onChange: readOnly ? void 0 : (e) => {
+        const raw = e.target.value;
+        onChange?.(raw === "" ? void 0 : Number(raw));
+      },
+      className: `${inputBase} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${readOnly ? inputReadOnly : inputEditable}`
+    }
+  ),
+  suffix && /* @__PURE__ */ jsx("span", { className: "absolute right-3 top-1/2 -translate-y-1/2 text-xs text-ink-tertiary pointer-events-none", children: suffix })
+] }) });
 var numberfield_default = NumberField;
 var sanitizeValue = (s) => String(s || "").replace(/[\u0000-\u001F\u007F-\u009F]/g, "").replace(/[\u00A0\u1680\u180E\u2000-\u200D\u2028-\u202F\u205F\u2060\u3000\uFEFF]+/g, " ").replace(/\s+/g, " ").trim();
 var TextField = ({
@@ -425,24 +436,29 @@ var TextField = ({
   ] }) });
 };
 var textfield_default = TextField;
-var SelectField = ({ label, value, options, onChange, readOnly }) => {
-  return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx(label_default, { text: label, className: "mb-1" }),
-    /* @__PURE__ */ jsxs(
-      "select",
-      {
-        value: value ?? "",
-        disabled: readOnly,
-        onChange: readOnly ? void 0 : (e) => onChange?.(e.target.value || void 0),
-        className: `${inputBase} ${readOnly ? inputReadOnly : inputEditable}`,
-        children: [
-          /* @__PURE__ */ jsx("option", { value: "", children: "\u2014" }),
-          options.map((o) => /* @__PURE__ */ jsx("option", { value: o.value, children: o.label }, o.value))
-        ]
-      }
-    )
-  ] });
-};
+var SelectField = ({
+  label,
+  tooltip,
+  value,
+  options,
+  onChange,
+  readOnly,
+  placeholder = "\u2014",
+  className,
+  visible
+}) => /* @__PURE__ */ jsx(FieldWrapper, { label, tooltip, className, visible, children: /* @__PURE__ */ jsxs(
+  "select",
+  {
+    value: value ?? "",
+    disabled: readOnly,
+    onChange: readOnly ? void 0 : (e) => onChange?.(e.target.value || void 0),
+    className: `${inputBase} ${readOnly ? inputReadOnly : inputEditable}`,
+    children: [
+      /* @__PURE__ */ jsx("option", { value: "", children: placeholder }),
+      options.map((o) => /* @__PURE__ */ jsx("option", { value: o.value, children: o.label }, o.value))
+    ]
+  }
+) });
 var selectfield_default = SelectField;
 var DEFAULT_COMPRESS_OPTS = { maxSizeMB: 0.5, maxWidthOrHeight: 400 };
 var LogoUpload = ({

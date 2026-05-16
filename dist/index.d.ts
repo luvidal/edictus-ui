@@ -140,47 +140,41 @@ interface Props$e<T extends string = string> {
 }
 declare const Radio: <T extends string = string>({ label, value, selected, onChange, className }: Props$e<T>) => react_jsx_runtime.JSX.Element;
 
-interface Props$d {
-    label?: string;
-    value: string;
-    placeholder?: string;
-    options: {
-        label: string;
-        value: string;
-    }[];
-    className?: string;
-    tooltip?: string;
-    onChange: (value: string) => void;
-}
-declare const Select: ({ label, value, placeholder, options, className, onChange }: Props$d) => react_jsx_runtime.JSX.Element;
-
-interface ComputedFieldProps {
-    label: string;
-    value: string;
-    suffix?: string;
-    className?: string;
-}
-declare const ComputedField: ({ label, value, suffix, className }: ComputedFieldProps) => react_jsx_runtime.JSX.Element;
-
-interface NumberFieldProps {
-    label: string;
-    value: number | undefined;
-    onChange?: (v: number | undefined) => void;
-    suffix?: string;
-    step?: string;
-    readOnly?: boolean;
-}
-declare const NumberField: ({ label, value, onChange, suffix, step, readOnly }: NumberFieldProps) => react_jsx_runtime.JSX.Element;
-
-interface Props$c {
+interface FieldProps<T> {
     label?: string;
     tooltip?: string;
-    value?: string;
-    onChange?: (v: string) => void;
+    value?: T;
+    onChange?: (v: T | undefined) => void;
     readOnly?: boolean;
     placeholder?: string;
     className?: string;
     visible?: boolean;
+}
+
+interface Props$d extends Omit<FieldProps<string>, 'onChange'> {
+    /** Select emits the picked option's string value — never undefined. */
+    onChange?: (v: string) => void;
+    options: {
+        label: string;
+        value: string;
+    }[];
+}
+declare const Select: ({ label, tooltip, value, placeholder, options, className, readOnly, visible, onChange, }: Props$d) => react_jsx_runtime.JSX.Element;
+
+interface ComputedFieldProps extends Omit<FieldProps<string>, 'onChange' | 'readOnly' | 'placeholder'> {
+    suffix?: string;
+}
+declare const ComputedField: ({ label, tooltip, value, suffix, className, visible }: ComputedFieldProps) => react_jsx_runtime.JSX.Element;
+
+interface NumberFieldProps extends FieldProps<number> {
+    suffix?: string;
+    step?: string;
+}
+declare const NumberField: ({ label, tooltip, value, onChange, suffix, step, readOnly, className, visible, }: NumberFieldProps) => react_jsx_runtime.JSX.Element;
+
+interface Props$c extends Omit<FieldProps<string>, 'onChange'> {
+    /** TextField commits a sanitized string — never undefined. */
+    onChange?: (v: string) => void;
     fullWidth?: boolean;
     icon?: string;
     onIconClick?: () => void;
@@ -188,17 +182,13 @@ interface Props$c {
 type TextFieldProps = Props$c & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value' | 'readOnly'>;
 declare const TextField: ({ label, tooltip, value, onChange, readOnly, placeholder, className, visible, fullWidth, icon, onIconClick, ...rest }: TextFieldProps) => react_jsx_runtime.JSX.Element;
 
-interface SelectFieldProps {
-    label: string;
-    value: string | undefined;
+interface SelectFieldProps extends FieldProps<string> {
     options: {
         label: string;
         value: string;
     }[];
-    onChange?: (v: string | undefined) => void;
-    readOnly?: boolean;
 }
-declare const SelectField: ({ label, value, options, onChange, readOnly }: SelectFieldProps) => react_jsx_runtime.JSX.Element;
+declare const SelectField: ({ label, tooltip, value, options, onChange, readOnly, placeholder, className, visible, }: SelectFieldProps) => react_jsx_runtime.JSX.Element;
 
 interface Props$b {
     label?: string;
