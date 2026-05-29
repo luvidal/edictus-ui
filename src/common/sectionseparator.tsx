@@ -1,5 +1,3 @@
-import React from 'react'
-
 type Props = { label: string; first?: boolean; className?: string }
 
 export default function SectionSeparator({ label, first, className = '' }: Props) {

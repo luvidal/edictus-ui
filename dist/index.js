@@ -1396,7 +1396,6 @@ function MasterDetail({
   sidebarHeader,
   sidebarFooter,
   mobileTbar,
-  mobileExtension,
   items,
   onSelect,
   detailLoading

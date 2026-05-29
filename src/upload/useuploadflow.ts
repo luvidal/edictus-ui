@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
-import { captureDataTransfer, resolveFiles } from '../common/folderutils'
+import { resolveFiles } from '../common/folderutils'
 import type { CapturedTransfer } from '../common/folderutils'
 
 export type FileStatus = 'queued' | 'compressing' | 'uploading' | 'analyzing' | 'detected' | 'linking' | 'done' | 'error'

@@ -1,4 +1,4 @@
-import React, { useId } from 'react'
+import { useId } from 'react'
 
 type Size = 'xs' | 'sm' | 'md' | 'lg'
 

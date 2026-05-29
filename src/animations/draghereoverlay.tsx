@@ -1,4 +1,3 @@
-import React from 'react'
 import { useIsMobile } from '../hooks'
 
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl'

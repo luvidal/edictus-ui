@@ -456,7 +456,7 @@ interface MasterDetailProps {
  * Auto-selection: Pass `items` and `onSelect` to automatically select the first
  * item on desktop. The detail panel should never be empty if data exists.
  */
-declare function MasterDetail({ title, icon, list, detail, hasSelection, sidebarWidth, actions, sidebarHeader, sidebarFooter, mobileTbar, mobileExtension, items, onSelect, detailLoading, }: MasterDetailProps): react_jsx_runtime.JSX.Element;
+declare function MasterDetail({ title, icon, list, detail, hasSelection, sidebarWidth, actions, sidebarHeader, sidebarFooter, mobileTbar, items, onSelect, detailLoading, }: MasterDetailProps): react_jsx_runtime.JSX.Element;
 
 type Color = 'default' | 'success' | 'warning' | 'danger';
 interface Props$2 {
