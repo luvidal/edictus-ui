@@ -46,8 +46,8 @@ const TextField = ({
     setCleanValue(sanitizeValue(value))
   }, [value])
 
-  const commit = () => {
-    const sanitized = sanitizeValue(localValue)
+  const commit = (rawValue = localValue) => {
+    const sanitized = sanitizeValue(rawValue)
     setLocalValue(sanitized)
     if (sanitized !== cleanValue) onChange?.(sanitized)
   }
@@ -68,8 +68,8 @@ const TextField = ({
           placeholder={readOnly ? undefined : placeholder}
           value={localValue}
           onChange={e => setLocalValue(e.target.value)}
-          onBlur={commit}
-          onKeyDown={e => e.key === 'Enter' && commit()}
+          onBlur={e => commit(e.currentTarget.value)}
+          onKeyDown={e => e.key === 'Enter' && commit(e.currentTarget.value)}
           className={`${inputBase} ${hasSuffix ? suffixPadding(suffix) : hasIcon ? 'pr-8' : ''} ${readOnly ? inputReadOnly : inputEditable} ${inputClassName}`}
         />
         {hasSuffix && (

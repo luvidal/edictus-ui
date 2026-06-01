@@ -62,6 +62,19 @@ describe('form fields', () => {
     expect(onChange).toHaveBeenCalledWith('30%')
   })
 
+  it('commits the current DOM value on blur even without a React input event', () => {
+    const onChange = vi.fn()
+    const node = render(<TextField aria-label="ratio" value="25" suffix="%" onChange={onChange} />)
+    const input = node.querySelector('input')!
+
+    act(() => {
+      setInputValue(input, '30%')
+      input.dispatchEvent(new FocusEvent('focusout', { bubbles: true }))
+    })
+
+    expect(onChange).toHaveBeenCalledWith('30%')
+  })
+
   it('reserves suffix padding in numeric and computed fields', () => {
     const node = render(
       <>
