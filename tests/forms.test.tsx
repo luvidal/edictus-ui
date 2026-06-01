@@ -75,6 +75,31 @@ describe('form fields', () => {
     expect(onChange).toHaveBeenCalledWith('30%')
   })
 
+  it('normalizes editable text before display and commit when normalizeInput is provided', () => {
+    const onChange = vi.fn()
+    const node = render(
+      <TextField
+        aria-label="ratio"
+        value="25"
+        suffix="%"
+        normalizeInput={value => value.replace(/%/g, '')}
+        onChange={onChange}
+      />
+    )
+    const input = node.querySelector('input')!
+
+    act(() => {
+      setInputValue(input, '30%')
+      input.dispatchEvent(new Event('input', { bubbles: true }))
+    })
+    expect(input.value).toBe('30')
+
+    act(() => {
+      input.dispatchEvent(new FocusEvent('focusout', { bubbles: true }))
+    })
+    expect(onChange).toHaveBeenCalledWith('30')
+  })
+
   it('reserves suffix padding in numeric and computed fields', () => {
     const node = render(
       <>

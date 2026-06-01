@@ -398,6 +398,7 @@ var TextField = ({
   onIconClick,
   suffix,
   inputClassName = "",
+  normalizeInput,
   ...rest
 }) => {
   const [localValue, setLocalValue] = useState(value);
@@ -407,9 +408,12 @@ var TextField = ({
     setCleanValue(sanitizeValue(value));
   }, [value]);
   const commit = (rawValue = localValue) => {
-    const sanitized = sanitizeValue(rawValue);
+    const sanitized = sanitizeValue(normalizeInput ? normalizeInput(rawValue) : rawValue);
     setLocalValue(sanitized);
     if (sanitized !== cleanValue) onChange?.(sanitized);
+  };
+  const handleInputChange = (rawValue) => {
+    setLocalValue(normalizeInput ? normalizeInput(rawValue) : rawValue);
   };
   const hasSuffix = !!suffix;
   const hasIcon = !!icon && !hasSuffix;
@@ -425,7 +429,7 @@ var TextField = ({
         tabIndex: readOnly ? -1 : void 0,
         placeholder: readOnly ? void 0 : placeholder,
         value: localValue,
-        onChange: (e) => setLocalValue(e.target.value),
+        onChange: (e) => handleInputChange(e.target.value),
         onBlur: (e) => commit(e.currentTarget.value),
         onKeyDown: (e) => e.key === "Enter" && commit(e.currentTarget.value),
         className: `${inputBase} ${hasSuffix ? suffixPadding(suffix) : hasIcon ? "pr-8" : ""} ${readOnly ? inputReadOnly : inputEditable} ${inputClassName}`

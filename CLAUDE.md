@@ -145,6 +145,7 @@ onIconClick?: () => void // if provided → interactive; if absent → decorativ
 - `TextField` supports `inputClassName` for input-level alignment/compact overrides; `className` remains the `FieldWrapper` class.
 - `TextField` suffix takes precedence over icon rendering. Callers should not request both right-side adornments.
 - `TextField` commits `event.currentTarget.value` on blur/Enter so browser autofill and automation-driven value changes do not commit stale React state.
+- `TextField` supports optional `normalizeInput(value)` to normalize editable text before local display and commit; keep it generic and domain-free.
 
 ## Field components — shared contract
 

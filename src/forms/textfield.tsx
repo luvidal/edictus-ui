@@ -12,6 +12,7 @@ interface Props extends Omit<FieldProps<string>, 'onChange'> {
   onIconClick?: () => void
   suffix?: string
   inputClassName?: string
+  normalizeInput?: (value: string) => string
 }
 
 type TextFieldProps = Props & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value' | 'readOnly'>
@@ -36,6 +37,7 @@ const TextField = ({
   onIconClick,
   suffix,
   inputClassName = '',
+  normalizeInput,
   ...rest
 }: TextFieldProps) => {
   const [localValue, setLocalValue] = useState(value)
@@ -47,9 +49,13 @@ const TextField = ({
   }, [value])
 
   const commit = (rawValue = localValue) => {
-    const sanitized = sanitizeValue(rawValue)
+    const sanitized = sanitizeValue(normalizeInput ? normalizeInput(rawValue) : rawValue)
     setLocalValue(sanitized)
     if (sanitized !== cleanValue) onChange?.(sanitized)
+  }
+
+  const handleInputChange = (rawValue: string) => {
+    setLocalValue(normalizeInput ? normalizeInput(rawValue) : rawValue)
   }
 
   const hasSuffix = !!suffix
@@ -67,7 +73,7 @@ const TextField = ({
           tabIndex={readOnly ? -1 : undefined}
           placeholder={readOnly ? undefined : placeholder}
           value={localValue}
-          onChange={e => setLocalValue(e.target.value)}
+          onChange={e => handleInputChange(e.target.value)}
           onBlur={e => commit(e.currentTarget.value)}
           onKeyDown={e => e.key === 'Enter' && commit(e.currentTarget.value)}
           className={`${inputBase} ${hasSuffix ? suffixPadding(suffix) : hasIcon ? 'pr-8' : ''} ${readOnly ? inputReadOnly : inputEditable} ${inputClassName}`}

@@ -7,4 +7,5 @@ Shared form primitives route labels and visibility through `FieldWrapper`.
 - `TextField`, `NumberField`, and `ComputedField` support `suffix` for units such as `%`, `UF`, or `m²`.
 - Suffix fields reserve enforced right padding based on suffix length (`%` uses `!pr-6`) so input text does not collide with the unit even when base field padding includes `px-*`.
 - `TextField` also accepts `inputClassName` for input-level alignment or compact layout tweaks while keeping wrapper classes on `className`.
+- `TextField` accepts `normalizeInput(value)` for generic input cleanup before display and blur commit.
 - `TextField` suffix rendering takes precedence over `icon`; callers should choose one right-side adornment per field.
