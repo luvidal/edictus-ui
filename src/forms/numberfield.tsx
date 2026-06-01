@@ -30,7 +30,7 @@ const NumberField = ({
           const raw = e.target.value
           onChange?.(raw === '' ? undefined : Number(raw))
         }}
-        className={`${inputBase} ${suffix ? 'pr-9' : ''} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
+        className={`${inputBase} ${suffix ? '!pr-9' : ''} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
           readOnly ? inputReadOnly : inputEditable
         }`}
       />
