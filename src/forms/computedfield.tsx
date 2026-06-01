@@ -1,5 +1,6 @@
 import FieldWrapper from './fieldwrapper'
 import { FieldProps } from './fieldprops'
+import { suffixPadding } from './inputstyles'
 
 interface ComputedFieldProps extends Omit<FieldProps<string>, 'onChange' | 'readOnly' | 'placeholder'> {
   suffix?: string
@@ -8,7 +9,7 @@ interface ComputedFieldProps extends Omit<FieldProps<string>, 'onChange' | 'read
 const ComputedField = ({ label, tooltip, value = '', suffix, className, visible }: ComputedFieldProps) => (
   <FieldWrapper label={label} tooltip={tooltip} className={className} visible={visible}>
     <div className="relative">
-      <div className={`border border-dashed border-edge-subtle/30 rounded-xl w-full text-sm px-3 py-2 ${suffix ? '!pr-9' : ''} tabular-nums bg-surface-0 text-ink-primary font-medium cursor-default select-none`}>
+      <div className={`border border-dashed border-edge-subtle/30 rounded-xl w-full text-sm px-3 py-2 ${suffixPadding(suffix)} tabular-nums bg-surface-0 text-ink-primary font-medium cursor-default select-none`}>
         {value}
       </div>
       {suffix && (

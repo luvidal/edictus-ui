@@ -141,7 +141,7 @@ onIconClick?: () => void // if provided → interactive; if absent → decorativ
 
 `TextField`, `NumberField`, and `ComputedField` support optional `suffix` for units such as `%`, `UF`, and `m²`.
 
-- Suffix fields reserve `!pr-9` input/content padding and render the suffix at `right-3` so values do not overlap the unit, even with base `px-*` padding utilities.
+- Suffix fields reserve enforced input/content padding based on suffix length (`%` uses `!pr-6`) and render the suffix at `right-3` so values do not overlap the unit, even with base `px-*` padding utilities.
 - `TextField` supports `inputClassName` for input-level alignment/compact overrides; `className` remains the `FieldWrapper` class.
 - `TextField` suffix takes precedence over icon rendering. Callers should not request both right-side adornments.
 

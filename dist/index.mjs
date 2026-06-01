@@ -306,6 +306,12 @@ var inputBase = "border border-edge-subtle/20 rounded-xl w-full text-sm px-3 py-
 var inputEditable = "bg-surface-0 focus:ring-2 focus:ring-brand/30 focus:border-brand/60 transition-all duration-200 outline-none";
 var inputReadOnly = "bg-surface-1 border-edge-subtle/15 cursor-default text-ink-tertiary";
 var disabledEffect = "opacity-40";
+var suffixPadding = (suffix) => {
+  if (!suffix) return "";
+  if (suffix.length <= 1) return "!pr-6";
+  if (suffix.length <= 2) return "!pr-8";
+  return "!pr-12";
+};
 var Select = ({
   label,
   tooltip,
@@ -344,7 +350,7 @@ var Select = ({
 };
 var select_default = Select;
 var ComputedField = ({ label, tooltip, value = "", suffix, className, visible }) => /* @__PURE__ */ jsx(FieldWrapper, { label, tooltip, className, visible, children: /* @__PURE__ */ jsxs("div", { className: "relative", children: [
-  /* @__PURE__ */ jsx("div", { className: `border border-dashed border-edge-subtle/30 rounded-xl w-full text-sm px-3 py-2 ${suffix ? "!pr-9" : ""} tabular-nums bg-surface-0 text-ink-primary font-medium cursor-default select-none`, children: value }),
+  /* @__PURE__ */ jsx("div", { className: `border border-dashed border-edge-subtle/30 rounded-xl w-full text-sm px-3 py-2 ${suffixPadding(suffix)} tabular-nums bg-surface-0 text-ink-primary font-medium cursor-default select-none`, children: value }),
   suffix && /* @__PURE__ */ jsx("span", { "aria-hidden": "true", className: "absolute right-3 top-1/2 -translate-y-1/2 pl-1 text-xs leading-none text-ink-tertiary pointer-events-none select-none", children: suffix })
 ] }) });
 var computedfield_default = ComputedField;
@@ -371,7 +377,7 @@ var NumberField = ({
         const raw = e.target.value;
         onChange?.(raw === "" ? void 0 : Number(raw));
       },
-      className: `${inputBase} ${suffix ? "!pr-9" : ""} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${readOnly ? inputReadOnly : inputEditable}`
+      className: `${inputBase} ${suffixPadding(suffix)} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${readOnly ? inputReadOnly : inputEditable}`
     }
   ),
   suffix && /* @__PURE__ */ jsx("span", { "aria-hidden": "true", className: "absolute right-3 top-1/2 -translate-y-1/2 pl-1 text-xs leading-none text-ink-tertiary pointer-events-none select-none", children: suffix })
@@ -422,7 +428,7 @@ var TextField = ({
         onChange: (e) => setLocalValue(e.target.value),
         onBlur: commit,
         onKeyDown: (e) => e.key === "Enter" && commit(),
-        className: `${inputBase} ${hasSuffix ? "!pr-9" : hasIcon ? "pr-8" : ""} ${readOnly ? inputReadOnly : inputEditable} ${inputClassName}`
+        className: `${inputBase} ${hasSuffix ? suffixPadding(suffix) : hasIcon ? "pr-8" : ""} ${readOnly ? inputReadOnly : inputEditable} ${inputClassName}`
       }
     ),
     hasSuffix && /* @__PURE__ */ jsx("span", { "aria-hidden": "true", className: "absolute right-3 top-1/2 -translate-y-1/2 pl-1 text-xs leading-none text-ink-tertiary pointer-events-none select-none", children: suffix }),

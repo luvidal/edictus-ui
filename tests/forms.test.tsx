@@ -40,7 +40,7 @@ describe('form fields', () => {
     const input = node.querySelector('input')!
     const suffix = node.querySelector('span[aria-hidden="true"]')!
 
-    expect(input.className).toContain('!pr-9')
+    expect(input.className).toContain('!pr-6')
     expect(suffix.textContent).toBe('%')
     expect(suffix.className).toContain('right-3')
   })
@@ -70,9 +70,9 @@ describe('form fields', () => {
       </>
     )
     const numberInput = node.querySelector('input')!
-    const paddedElements = Array.from(node.querySelectorAll('input, div')).filter(el => el.className.includes('!pr-9'))
+    const paddedElements = Array.from(node.querySelectorAll('input, div')).filter(el => el.className.includes('!pr-6'))
 
-    expect(numberInput.className).toContain('!pr-9')
+    expect(numberInput.className).toContain('!pr-6')
     expect(paddedElements).toHaveLength(2)
   })
 })

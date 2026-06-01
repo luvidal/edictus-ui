@@ -1,6 +1,6 @@
 import FieldWrapper from './fieldwrapper'
 import { FieldProps } from './fieldprops'
-import { inputBase, inputEditable, inputReadOnly } from './inputstyles'
+import { inputBase, inputEditable, inputReadOnly, suffixPadding } from './inputstyles'
 
 interface NumberFieldProps extends FieldProps<number> {
   suffix?: string
@@ -30,7 +30,7 @@ const NumberField = ({
           const raw = e.target.value
           onChange?.(raw === '' ? undefined : Number(raw))
         }}
-        className={`${inputBase} ${suffix ? '!pr-9' : ''} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
+        className={`${inputBase} ${suffixPadding(suffix)} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
           readOnly ? inputReadOnly : inputEditable
         }`}
       />
