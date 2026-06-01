@@ -178,9 +178,11 @@ interface Props$c extends Omit<FieldProps<string>, 'onChange'> {
     fullWidth?: boolean;
     icon?: string;
     onIconClick?: () => void;
+    suffix?: string;
+    inputClassName?: string;
 }
 type TextFieldProps = Props$c & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value' | 'readOnly'>;
-declare const TextField: ({ label, tooltip, value, onChange, readOnly, placeholder, className, visible, fullWidth, icon, onIconClick, ...rest }: TextFieldProps) => react_jsx_runtime.JSX.Element;
+declare const TextField: ({ label, tooltip, value, onChange, readOnly, placeholder, className, visible, fullWidth, icon, onIconClick, suffix, inputClassName, ...rest }: TextFieldProps) => react_jsx_runtime.JSX.Element;
 
 interface SelectFieldProps extends FieldProps<string> {
     options: {

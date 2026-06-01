@@ -137,6 +137,14 @@ onIconClick?: () => void // if provided → interactive; if absent → decorativ
 - Input wrapped in `<div className="relative">` when icon is set (same pattern as NumberField's suffix)
 - Backward compatible — callers that don't pass `icon` see no change
 
+## Field Suffix Support
+
+`TextField`, `NumberField`, and `ComputedField` support optional `suffix` for units such as `%`, `UF`, and `m²`.
+
+- Suffix fields reserve `pr-9` input/content padding and render the suffix at `right-3` so values do not overlap the unit.
+- `TextField` supports `inputClassName` for input-level alignment/compact overrides; `className` remains the `FieldWrapper` class.
+- `TextField` suffix takes precedence over icon rendering. Callers should not request both right-side adornments.
+
 ## Field components — shared contract
 
 `TextField`, `NumberField`, `Select`, `SelectField`, `ComputedField` all extend `FieldProps<T>` from `forms/fieldprops.ts`:

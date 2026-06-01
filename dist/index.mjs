@@ -344,8 +344,8 @@ var Select = ({
 };
 var select_default = Select;
 var ComputedField = ({ label, tooltip, value = "", suffix, className, visible }) => /* @__PURE__ */ jsx(FieldWrapper, { label, tooltip, className, visible, children: /* @__PURE__ */ jsxs("div", { className: "relative", children: [
-  /* @__PURE__ */ jsx("div", { className: "border border-dashed border-edge-subtle/30 rounded-xl w-full text-sm px-3 py-2 tabular-nums bg-surface-0 text-ink-primary font-medium cursor-default select-none", children: value }),
-  suffix && /* @__PURE__ */ jsx("span", { className: "absolute right-3 top-1/2 -translate-y-1/2 text-xs text-ink-tertiary pointer-events-none", children: suffix })
+  /* @__PURE__ */ jsx("div", { className: `border border-dashed border-edge-subtle/30 rounded-xl w-full text-sm px-3 py-2 ${suffix ? "pr-9" : ""} tabular-nums bg-surface-0 text-ink-primary font-medium cursor-default select-none`, children: value }),
+  suffix && /* @__PURE__ */ jsx("span", { "aria-hidden": "true", className: "absolute right-3 top-1/2 -translate-y-1/2 pl-1 text-xs leading-none text-ink-tertiary pointer-events-none select-none", children: suffix })
 ] }) });
 var computedfield_default = ComputedField;
 var NumberField = ({
@@ -371,10 +371,10 @@ var NumberField = ({
         const raw = e.target.value;
         onChange?.(raw === "" ? void 0 : Number(raw));
       },
-      className: `${inputBase} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${readOnly ? inputReadOnly : inputEditable}`
+      className: `${inputBase} ${suffix ? "pr-9" : ""} tabular-nums [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${readOnly ? inputReadOnly : inputEditable}`
     }
   ),
-  suffix && /* @__PURE__ */ jsx("span", { className: "absolute right-3 top-1/2 -translate-y-1/2 text-xs text-ink-tertiary pointer-events-none", children: suffix })
+  suffix && /* @__PURE__ */ jsx("span", { "aria-hidden": "true", className: "absolute right-3 top-1/2 -translate-y-1/2 pl-1 text-xs leading-none text-ink-tertiary pointer-events-none select-none", children: suffix })
 ] }) });
 var numberfield_default = NumberField;
 var sanitizeValue = (s) => String(s || "").replace(/[\u0000-\u001F\u007F-\u009F]/g, "").replace(/[\u00A0\u1680\u180E\u2000-\u200D\u2028-\u202F\u205F\u2060\u3000\uFEFF]+/g, " ").replace(/\s+/g, " ").trim();
@@ -390,6 +390,8 @@ var TextField = ({
   fullWidth,
   icon,
   onIconClick,
+  suffix,
+  inputClassName = "",
   ...rest
 }) => {
   const [localValue, setLocalValue] = useState(value);
@@ -403,7 +405,8 @@ var TextField = ({
     setLocalValue(sanitized);
     if (sanitized !== cleanValue) onChange?.(sanitized);
   };
-  const hasIcon = !!icon;
+  const hasSuffix = !!suffix;
+  const hasIcon = !!icon && !hasSuffix;
   const isInteractive = hasIcon && !!onIconClick;
   const wrapperClass = `${fullWidth ? "col-span-2" : ""} ${className}`.trim();
   return /* @__PURE__ */ jsx(FieldWrapper, { label, tooltip, className: wrapperClass, visible, children: /* @__PURE__ */ jsxs("div", { className: "relative", children: [
@@ -419,9 +422,10 @@ var TextField = ({
         onChange: (e) => setLocalValue(e.target.value),
         onBlur: commit,
         onKeyDown: (e) => e.key === "Enter" && commit(),
-        className: `${inputBase} ${hasIcon ? "pr-8" : ""} ${readOnly ? inputReadOnly : inputEditable}`
+        className: `${inputBase} ${hasSuffix ? "pr-9" : hasIcon ? "pr-8" : ""} ${readOnly ? inputReadOnly : inputEditable} ${inputClassName}`
       }
     ),
+    hasSuffix && /* @__PURE__ */ jsx("span", { "aria-hidden": "true", className: "absolute right-3 top-1/2 -translate-y-1/2 pl-1 text-xs leading-none text-ink-tertiary pointer-events-none select-none", children: suffix }),
     hasIcon && isInteractive && /* @__PURE__ */ jsx(
       "button",
       {
