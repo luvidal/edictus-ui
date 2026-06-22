@@ -41,6 +41,8 @@ const config: Config = {
                 info:               withAlpha('--status-info'),
                 'info-muted':       withAlpha('--status-info-muted'),
                 'info-contrast':    withAlpha('--status-info-contrast'),
+                danger:             withAlpha('--status-danger'),
+                'danger-contrast':  withAlpha('--status-danger-contrast'),
             },
         },
     } },

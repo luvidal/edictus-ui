@@ -69,7 +69,7 @@ All user-facing text uses informal **tú**, never **usted**:
 5. **Tailwind classes** — the package ships class strings but does NOT bundle CSS. Consumers add the dist path to their `tailwind.config.ts` content array
 6. **API stability** — exported props interfaces must stay backward-compatible with jogi's call sites. Breaking changes require updating jogi's re-export shims
 7. **No domain logic** — components must not import domain-specific data (doctypes, section colors, user roles). All customization via props
-8. **Theming** — use CSS custom properties (`--theme-50` through `--theme-950`) for role-based colors. Semantic colors (danger=rose, warning=amber, success=emerald, info=violet) are hardcoded Tailwind values
+8. **Theming** — `--theme-50`…`--theme-950` for role/brand colors; semantic state uses consumer-provided `--status-*` tokens (`status-ok/warn/late/pending/info/danger` + `-contrast`), never hardcoded Tailwind palette values. `danger` is a true red for destructive actions, distinct from rose `pending`. Status tokens encode meaning, so they don't rotate per role/brand.
 9. **After modifying a feature**, update this CLAUDE.md if any key behavior changed
 10. **README.md maintenance** — every modification to a component folder must update its `README.md` to reflect changes
 11. **Test coverage** — after implementing a feature, check if tests exist for the affected code (`tests/`). Update or write tests. Never leave a feature without test coverage.
@@ -84,7 +84,7 @@ Components use Tailwind classes that reference CSS custom properties:
 --theme-50, --theme-100, ..., --theme-950
 ```
 
-Tailwind config maps `theme-*` classes to these variables. Semantic colors (danger, warning, success, info) use hardcoded Tailwind colors — they don't change per role.
+Tailwind config maps `theme-*` and `status-*` classes to these variables. Semantic status colors (`--status-ok/warn/late/pending/info/danger` + `-contrast`) are supplied by the consumer (and by `dev/tailwind.css` for this package's Vite preview); they encode meaning, so they don't change per role.
 
 ## Exports
 

@@ -32,4 +32,6 @@
     --status-info:             96  165 250;
     --status-info-muted:       96  165 250;
     --status-info-contrast:    23  37  84;
+    --status-danger:           220 38  38;
+    --status-danger-contrast:  255 255 255;
 }

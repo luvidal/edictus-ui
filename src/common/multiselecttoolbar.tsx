@@ -54,14 +54,14 @@ export function MultiselectToolbar({ state, variant }: MultiselectToolbarProps) 
       <div className='flex items-center gap-3'>
         <span
           onClick={toggleSelectMode}
-          className='flex items-center gap-1.5 text-[11px] text-white/80 uppercase tracking-wider cursor-pointer hover:text-white transition-colors'
+          className='flex items-center gap-1.5 text-[11px] text-ink-secondary uppercase tracking-wider cursor-pointer hover:text-ink-primary transition-colors'
         >
           <Icon name='X' size={12} />
           {checkedIds.size > 0 ? `${checkedIds.size} sel.` : 'Cancelar'}
         </span>
         <span
           onClick={handleSelectAll}
-          className='flex items-center text-white/50 cursor-pointer hover:text-white/80 transition-colors'
+          className='flex items-center text-ink-tertiary cursor-pointer hover:text-ink-secondary transition-colors'
           title={allChecked ? 'Deseleccionar todo' : 'Seleccionar todo'}
         >
           <Icon name={allChecked ? 'SquareCheckBig' : 'Square'} size={14} />
@@ -69,7 +69,7 @@ export function MultiselectToolbar({ state, variant }: MultiselectToolbarProps) 
         {hasBulkRead && (
           <span
             onClick={checkedIds.size > 0 ? handleBulkRead : undefined}
-            className={`flex items-center transition-colors ${checkedIds.size > 0 ? 'text-blue-400 cursor-pointer hover:text-blue-300' : 'text-white/20 cursor-not-allowed'}`}
+            className={`flex items-center transition-colors ${checkedIds.size > 0 ? 'text-status-info cursor-pointer hover:text-status-info/80' : 'text-ink-disabled cursor-not-allowed'}`}
             title='Marcar como leído'
           >
             <Icon name='MailCheck' size={14} />
@@ -77,7 +77,7 @@ export function MultiselectToolbar({ state, variant }: MultiselectToolbarProps) 
         )}
         <span
           onClick={checkedIds.size > 0 ? handleBulkDelete : undefined}
-          className={`flex items-center transition-colors ${checkedIds.size > 0 ? 'text-red-400 cursor-pointer hover:text-red-300' : 'text-white/20 cursor-not-allowed'}`}
+          className={`flex items-center transition-colors ${checkedIds.size > 0 ? 'text-status-pending cursor-pointer hover:text-status-pending/80' : 'text-ink-disabled cursor-not-allowed'}`}
           title='Eliminar seleccionados'
         >
           <Icon name='Trash2' size={14} />
@@ -89,7 +89,7 @@ export function MultiselectToolbar({ state, variant }: MultiselectToolbarProps) 
     return (
       <span
         onClick={toggleSelectMode}
-        className='flex items-center gap-1.5 text-[11px] text-white/50 uppercase tracking-wider cursor-pointer hover:text-white/70 transition-colors'
+        className='flex items-center gap-1.5 text-[11px] text-ink-tertiary uppercase tracking-wider cursor-pointer hover:text-ink-secondary transition-colors'
       >
         <Icon name='SquareCheck' size={12} />
         Seleccionar

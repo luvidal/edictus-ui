@@ -1,9 +1,9 @@
 export const variantConfig = {
   danger: {
     icon: 'Trash2',
-    iconBg: 'bg-status-pending/10',
-    iconColor: 'text-status-pending',
-    confirmBg: 'bg-status-pending hover:bg-status-pending/80',
+    iconBg: 'bg-status-danger/10',
+    iconColor: 'text-status-danger',
+    confirmBg: 'bg-status-danger hover:bg-status-danger/90',
   },
   warning: {
     icon: 'TriangleAlert',
