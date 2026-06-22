@@ -9,18 +9,18 @@ interface SidebarFilterProps {
     placeholder?: string
 }
 
-/** Compact filter input for dark sidebar */
+/** Compact filter input for the master-detail sidebar */
 export function SidebarFilter({ value, onChange, placeholder = 'Filtrar...' }: SidebarFilterProps) {
     return (
-        <div className='flex items-center gap-2 bg-white/10 rounded-btn px-3 h-9'>
-            <Icon name='Search' size={14} className='text-white/50' />
+        <div className='flex items-center gap-2 bg-surface-2 border border-edge-subtle/30 rounded-btn px-3 h-9'>
+            <Icon name='Search' size={14} className='text-ink-tertiary' />
             <input
                 type='text'
                 defaultValue={value}
                 onBlur={e => onChange(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') { onChange(e.currentTarget.value); e.currentTarget.blur() } }}
                 placeholder={placeholder}
-                className='flex-1 min-w-0 bg-transparent text-sm text-white placeholder:text-white/40 border-none focus:ring-0 outline-none'
+                className='flex-1 min-w-0 bg-transparent text-sm text-ink-primary placeholder:text-ink-tertiary border-none focus:ring-0 outline-none'
             />
         </div>
     )
@@ -34,30 +34,37 @@ interface SidebarSortProps {
     onDirectionChange: (dir: 'asc' | 'desc') => void
 }
 
-/** Compact sort dropdown for dark sidebar */
+/** Compact sort dropdown for the master-detail sidebar */
 export function SidebarSort({ options, value, onChange, direction, onDirectionChange }: SidebarSortProps) {
     return (
         <div className='flex items-center gap-2'>
-            <select
-                value={value}
-                onChange={e => onChange(e.target.value)}
-                className='flex-1 min-w-0 h-8 px-3 pr-8 text-xs bg-white/10 text-white rounded-btn border-none focus:ring-1 focus:ring-white/30 cursor-pointer appearance-none bg-[url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27rgba(255%2C255%2C255%2C0.5)%27%20stroke-width%3D%272%27%3E%3Cpath%20d%3D%27m6%209%206%206%206-6%27%2F%3E%3C%2Fsvg%3E")] bg-no-repeat bg-[center_right_0.5rem]'
-            >
-                {options.map(opt => (
-                    <option key={opt.value} value={opt.value} className='bg-theme-700 text-white'>
-                        {opt.label}
-                    </option>
-                ))}
-            </select>
+            <div className='relative flex-1 min-w-0'>
+                <select
+                    value={value}
+                    onChange={e => onChange(e.target.value)}
+                    className='w-full h-8 px-3 pr-8 text-xs bg-surface-2 text-ink-primary rounded-btn border border-edge-subtle/30 focus:ring-1 focus:ring-edge-focus/40 cursor-pointer appearance-none'
+                >
+                    {options.map(opt => (
+                        <option key={opt.value} value={opt.value} className='bg-surface-2 text-ink-primary'>
+                            {opt.label}
+                        </option>
+                    ))}
+                </select>
+                <Icon
+                    name='ChevronDown'
+                    size={12}
+                    className='absolute right-2 top-1/2 -translate-y-1/2 text-ink-tertiary pointer-events-none'
+                />
+            </div>
             <button
                 onClick={() => onDirectionChange(direction === 'asc' ? 'desc' : 'asc')}
-                className='h-8 w-8 flex items-center justify-center rounded-btn bg-white/10 hover:bg-white/20 transition-colors'
+                className='h-8 w-8 flex items-center justify-center rounded-btn bg-surface-2 border border-edge-subtle/30 hover:bg-surface-3 transition-colors'
                 title={direction === 'asc' ? 'Ascendente' : 'Descendente'}
             >
                 <Icon
                     name={direction === 'asc' ? 'ArrowUp' : 'ArrowDown'}
                     size={14}
-                    className='text-white/80'
+                    className='text-ink-secondary'
                 />
             </button>
         </div>
@@ -70,7 +77,7 @@ interface SidebarPaginatorProps {
     hasNext: boolean
 }
 
-/** Compact paginator for dark sidebar - auto-hides when only one page */
+/** Compact paginator for the master-detail sidebar - auto-hides when only one page */
 export function SidebarPaginator({ page, setPage, hasNext }: SidebarPaginatorProps) {
     const hasPrev = page > 0
 
@@ -82,19 +89,19 @@ export function SidebarPaginator({ page, setPage, hasNext }: SidebarPaginatorPro
             <button
                 onClick={() => setPage(Math.max(0, page - 1))}
                 disabled={!hasPrev}
-                className='h-8 w-8 flex items-center justify-center rounded-btn bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors'
+                className='h-8 w-8 flex items-center justify-center rounded-btn bg-surface-2 border border-edge-subtle/30 hover:bg-surface-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors'
             >
-                <Icon name='ChevronLeft' size={16} className='text-white' />
+                <Icon name='ChevronLeft' size={16} className='text-ink-secondary' />
             </button>
-            <span className='text-xs text-white/60'>
+            <span className='text-xs text-ink-tertiary'>
                 Página {page + 1}
             </span>
             <button
                 onClick={() => setPage(page + 1)}
                 disabled={!hasNext}
-                className='h-8 w-8 flex items-center justify-center rounded-btn bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors'
+                className='h-8 w-8 flex items-center justify-center rounded-btn bg-surface-2 border border-edge-subtle/30 hover:bg-surface-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors'
             >
-                <Icon name='ChevronRight' size={16} className='text-white' />
+                <Icon name='ChevronRight' size={16} className='text-ink-secondary' />
             </button>
         </div>
     )
@@ -131,11 +138,11 @@ export default function SidebarControls({
             {/* Collapsed: show summary bar */}
             <button
                 onClick={() => setExpanded(!expanded)}
-                className='flex items-center justify-between gap-2 h-9 px-3 rounded-btn bg-white/10 hover:bg-white/15 transition-colors'
+                className='flex items-center justify-between gap-2 h-9 px-3 rounded-btn bg-surface-2 border border-edge-subtle/30 hover:bg-surface-3 transition-colors'
             >
                 <div className='flex items-center gap-2 min-w-0'>
-                    <Icon name='SlidersHorizontal' size={14} className='text-white/60 flex-shrink-0' />
-                    <span className='text-xs text-white/80 truncate'>
+                    <Icon name='SlidersHorizontal' size={14} className='text-ink-tertiary flex-shrink-0' />
+                    <span className='text-xs text-ink-secondary truncate'>
                         {search ? `"${search}"` : currentSortLabel}
                         {search && ` · ${currentSortLabel}`}
                     </span>
@@ -143,7 +150,7 @@ export default function SidebarControls({
                 <Icon
                     name={expanded ? 'ChevronUp' : 'ChevronDown'}
                     size={14}
-                    className='text-white/50 flex-shrink-0'
+                    className='text-ink-tertiary flex-shrink-0'
                 />
             </button>
 

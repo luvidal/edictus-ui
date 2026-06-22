@@ -75,7 +75,7 @@ const ContextMenu = ({ open, position, items, onClose }: Props) => {
   return createPortal(
     <div
       ref={menuRef}
-      className='fixed z-50 w-52 rounded-xl overflow-hidden shadow-2xl bg-surface-3 border border-white/10'
+      className='fixed z-50 w-52 rounded-xl overflow-hidden shadow-2xl bg-surface-3 border border-edge-subtle/20'
       style={{
         left: displayPos.x,
         top: displayPos.y,
@@ -87,19 +87,19 @@ const ContextMenu = ({ open, position, items, onClose }: Props) => {
       <div className='flex flex-col gap-px p-1'>
         {items.map((item, i) => {
           if (item.type === 'separator') {
-            return <div key={i} className='h-px bg-white/10 my-1 mx-2' />
+            return <div key={i} className='h-px bg-edge-subtle/20 my-1 mx-2' />
           }
           const variantClass =
-            item.variant === 'red'   ? 'text-red-400 hover:text-red-300'     :
-            item.variant === 'amber' ? 'text-amber-400 hover:text-amber-300' :
-                                       'text-white/80 hover:text-white'
+            item.variant === 'red'   ? 'text-status-pending hover:text-status-pending/80' :
+            item.variant === 'amber' ? 'text-status-warn hover:text-status-warn/80'       :
+                                       'text-ink-secondary hover:text-ink-primary'
           return (
             <button
               key={i}
               type='button'
               disabled={item.disabled}
               className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left ${variantClass} ${
-                item.disabled ? 'opacity-40 cursor-not-allowed' : 'hover:bg-black/20'
+                item.disabled ? 'opacity-40 cursor-not-allowed' : 'hover:bg-edge-subtle/15'
               }`}
               onClick={e => {
                 e.stopPropagation()

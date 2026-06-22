@@ -476,7 +476,7 @@ interface SidebarFilterProps {
     onChange: (value: string) => void;
     placeholder?: string;
 }
-/** Compact filter input for dark sidebar */
+/** Compact filter input for the master-detail sidebar */
 declare function SidebarFilter({ value, onChange, placeholder }: SidebarFilterProps): react_jsx_runtime.JSX.Element;
 interface SidebarSortProps {
     options: {
@@ -488,14 +488,14 @@ interface SidebarSortProps {
     direction: 'asc' | 'desc';
     onDirectionChange: (dir: 'asc' | 'desc') => void;
 }
-/** Compact sort dropdown for dark sidebar */
+/** Compact sort dropdown for the master-detail sidebar */
 declare function SidebarSort({ options, value, onChange, direction, onDirectionChange }: SidebarSortProps): react_jsx_runtime.JSX.Element;
 interface SidebarPaginatorProps {
     page: number;
     setPage: (page: number) => void;
     hasNext: boolean;
 }
-/** Compact paginator for dark sidebar - auto-hides when only one page */
+/** Compact paginator for the master-detail sidebar - auto-hides when only one page */
 declare function SidebarPaginator({ page, setPage, hasNext }: SidebarPaginatorProps): react_jsx_runtime.JSX.Element | null;
 
 interface DetailBarProps {

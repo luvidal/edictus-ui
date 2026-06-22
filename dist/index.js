@@ -1313,7 +1313,7 @@ var ContextMenu = ({ open, position, items, onClose }) => {
       "div",
       {
         ref: menuRef,
-        className: "fixed z-50 w-52 rounded-xl overflow-hidden shadow-2xl bg-surface-3 border border-white/10",
+        className: "fixed z-50 w-52 rounded-xl overflow-hidden shadow-2xl bg-surface-3 border border-edge-subtle/20",
         style: {
           left: displayPos.x,
           top: displayPos.y,
@@ -1323,15 +1323,15 @@ var ContextMenu = ({ open, position, items, onClose }) => {
         onMouseDown: (e) => e.stopPropagation(),
         children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "flex flex-col gap-px p-1", children: items.map((item, i) => {
           if (item.type === "separator") {
-            return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-px bg-white/10 my-1 mx-2" }, i);
+            return /* @__PURE__ */ jsxRuntime.jsx("div", { className: "h-px bg-edge-subtle/20 my-1 mx-2" }, i);
           }
-          const variantClass = item.variant === "red" ? "text-red-400 hover:text-red-300" : item.variant === "amber" ? "text-amber-400 hover:text-amber-300" : "text-white/80 hover:text-white";
+          const variantClass = item.variant === "red" ? "text-status-pending hover:text-status-pending/80" : item.variant === "amber" ? "text-status-warn hover:text-status-warn/80" : "text-ink-secondary hover:text-ink-primary";
           return /* @__PURE__ */ jsxRuntime.jsxs(
             "button",
             {
               type: "button",
               disabled: item.disabled,
-              className: `w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left ${variantClass} ${item.disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-black/20"}`,
+              className: `w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left ${variantClass} ${item.disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-edge-subtle/15"}`,
               onClick: (e) => {
                 e.stopPropagation();
                 if (item.disabled) return;
@@ -1513,8 +1513,8 @@ var StatCard = ({ label, value, icon, subtitle, color = "default" }) => {
 };
 var statcard_default = StatCard;
 function SidebarFilter({ value, onChange, placeholder = "Filtrar..." }) {
-  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-2 bg-white/10 rounded-btn px-3 h-9", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: "Search", size: 14, className: "text-white/50" }),
+  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-2 bg-surface-2 border border-edge-subtle/30 rounded-btn px-3 h-9", children: [
+    /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: "Search", size: 14, className: "text-ink-tertiary" }),
     /* @__PURE__ */ jsxRuntime.jsx(
       "input",
       {
@@ -1528,34 +1528,44 @@ function SidebarFilter({ value, onChange, placeholder = "Filtrar..." }) {
           }
         },
         placeholder,
-        className: "flex-1 min-w-0 bg-transparent text-sm text-white placeholder:text-white/40 border-none focus:ring-0 outline-none"
+        className: "flex-1 min-w-0 bg-transparent text-sm text-ink-primary placeholder:text-ink-tertiary border-none focus:ring-0 outline-none"
       }
     )
   ] });
 }
 function SidebarSort({ options, value, onChange, direction, onDirectionChange }) {
   return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "flex items-center gap-2", children: [
-    /* @__PURE__ */ jsxRuntime.jsx(
-      "select",
-      {
-        value,
-        onChange: (e) => onChange(e.target.value),
-        className: 'flex-1 min-w-0 h-8 px-3 pr-8 text-xs bg-white/10 text-white rounded-btn border-none focus:ring-1 focus:ring-white/30 cursor-pointer appearance-none bg-[url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27rgba(255%2C255%2C255%2C0.5)%27%20stroke-width%3D%272%27%3E%3Cpath%20d%3D%27m6%209%206%206%206-6%27%2F%3E%3C%2Fsvg%3E")] bg-no-repeat bg-[center_right_0.5rem]',
-        children: options.map((opt) => /* @__PURE__ */ jsxRuntime.jsx("option", { value: opt.value, className: "bg-theme-700 text-white", children: opt.label }, opt.value))
-      }
-    ),
+    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "relative flex-1 min-w-0", children: [
+      /* @__PURE__ */ jsxRuntime.jsx(
+        "select",
+        {
+          value,
+          onChange: (e) => onChange(e.target.value),
+          className: "w-full h-8 px-3 pr-8 text-xs bg-surface-2 text-ink-primary rounded-btn border border-edge-subtle/30 focus:ring-1 focus:ring-edge-focus/40 cursor-pointer appearance-none",
+          children: options.map((opt) => /* @__PURE__ */ jsxRuntime.jsx("option", { value: opt.value, className: "bg-surface-2 text-ink-primary", children: opt.label }, opt.value))
+        }
+      ),
+      /* @__PURE__ */ jsxRuntime.jsx(
+        icon_default,
+        {
+          name: "ChevronDown",
+          size: 12,
+          className: "absolute right-2 top-1/2 -translate-y-1/2 text-ink-tertiary pointer-events-none"
+        }
+      )
+    ] }),
     /* @__PURE__ */ jsxRuntime.jsx(
       "button",
       {
         onClick: () => onDirectionChange(direction === "asc" ? "desc" : "asc"),
-        className: "h-8 w-8 flex items-center justify-center rounded-btn bg-white/10 hover:bg-white/20 transition-colors",
+        className: "h-8 w-8 flex items-center justify-center rounded-btn bg-surface-2 border border-edge-subtle/30 hover:bg-surface-3 transition-colors",
         title: direction === "asc" ? "Ascendente" : "Descendente",
         children: /* @__PURE__ */ jsxRuntime.jsx(
           icon_default,
           {
             name: direction === "asc" ? "ArrowUp" : "ArrowDown",
             size: 14,
-            className: "text-white/80"
+            className: "text-ink-secondary"
           }
         )
       }
@@ -1571,11 +1581,11 @@ function SidebarPaginator({ page, setPage, hasNext }) {
       {
         onClick: () => setPage(Math.max(0, page - 1)),
         disabled: !hasPrev,
-        className: "h-8 w-8 flex items-center justify-center rounded-btn bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors",
-        children: /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: "ChevronLeft", size: 16, className: "text-white" })
+        className: "h-8 w-8 flex items-center justify-center rounded-btn bg-surface-2 border border-edge-subtle/30 hover:bg-surface-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors",
+        children: /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: "ChevronLeft", size: 16, className: "text-ink-secondary" })
       }
     ),
-    /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "text-xs text-white/60", children: [
+    /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "text-xs text-ink-tertiary", children: [
       "P\xE1gina ",
       page + 1
     ] }),
@@ -1584,8 +1594,8 @@ function SidebarPaginator({ page, setPage, hasNext }) {
       {
         onClick: () => setPage(page + 1),
         disabled: !hasNext,
-        className: "h-8 w-8 flex items-center justify-center rounded-btn bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors",
-        children: /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: "ChevronRight", size: 16, className: "text-white" })
+        className: "h-8 w-8 flex items-center justify-center rounded-btn bg-surface-2 border border-edge-subtle/30 hover:bg-surface-3 disabled:opacity-30 disabled:cursor-not-allowed transition-colors",
+        children: /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: "ChevronRight", size: 16, className: "text-ink-secondary" })
       }
     )
   ] });
@@ -2101,8 +2111,8 @@ var ToolbarButton = ({
   const btnRef = react.useRef(null);
   const disabledStyle = disabled ? disabledEffect : "";
   const isIconOnly = color !== void 0;
-  const variantStyles = color && color !== "default" ? colorStyles[color] : variant === "light" ? "bg-white hover:bg-gray-50 text-theme-700 hover:text-theme-800" : isIconOnly ? "text-white/80 hover:text-white hover:bg-surface-3" : "bg-surface-3 hover:bg-surface-4 text-white/80 hover:text-white";
-  const activeStyles = variant === "light" ? "bg-gray-100 text-theme-600" : "bg-surface-4 text-white";
+  const variantStyles = color && color !== "default" ? colorStyles[color] : variant === "light" ? "bg-white hover:bg-gray-50 text-theme-700 hover:text-theme-800" : isIconOnly ? "text-ink-secondary hover:text-ink-primary hover:bg-surface-3" : "bg-surface-3 hover:bg-surface-4 text-ink-secondary hover:text-ink-primary";
+  const activeStyles = variant === "light" ? "bg-gray-100 text-theme-600" : "bg-surface-4 text-ink-primary";
   return /* @__PURE__ */ jsxRuntime.jsxs(
     "button",
     {
