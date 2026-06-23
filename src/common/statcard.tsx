@@ -10,11 +10,15 @@ interface Props {
     color?: Color
 }
 
+// Identity (tint + colored icon) carries the status; the TEXT must stay legible.
+// In light the mid-tone status colors wash out on their own pale /10 tint, so the
+// label/value drop to dark ink (`light:` only — dark keeps the bright status text,
+// which reads fine on the dark tint and is the reference). See docs/ref/theme-contrast.md.
 const colorConfig: Record<Color, { bg: string; text: string; iconBg: string; iconColor: string }> = {
-    default:  { bg: 'bg-surface-2/40',       text: 'text-ink-primary',    iconBg: 'bg-surface-3',         iconColor: 'text-brand' },
-    success:  { bg: 'bg-status-ok/10',       text: 'text-status-ok',      iconBg: 'bg-status-ok/20',      iconColor: 'text-status-ok' },
-    warning:  { bg: 'bg-status-warn/10',     text: 'text-status-warn',    iconBg: 'bg-status-warn/20',    iconColor: 'text-status-warn' },
-    danger:   { bg: 'bg-status-pending/10',  text: 'text-status-pending', iconBg: 'bg-status-pending/20', iconColor: 'text-status-pending' },
+    default:  { bg: 'bg-surface-2/40',       text: 'text-ink-primary',                              iconBg: 'bg-surface-3',         iconColor: 'text-brand' },
+    success:  { bg: 'bg-status-ok/10',       text: 'text-status-ok light:text-ink-primary',         iconBg: 'bg-status-ok/20',      iconColor: 'text-status-ok' },
+    warning:  { bg: 'bg-status-warn/10',     text: 'text-status-warn light:text-ink-primary',       iconBg: 'bg-status-warn/20',    iconColor: 'text-status-warn' },
+    danger:   { bg: 'bg-status-pending/10',  text: 'text-status-pending light:text-ink-primary',    iconBg: 'bg-status-pending/20', iconColor: 'text-status-pending' },
 }
 
 const StatCard = ({ label, value, icon, subtitle, color = 'default' }: Props) => {

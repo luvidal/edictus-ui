@@ -1350,7 +1350,7 @@ var Card = ({ item, isSelected, onClick, checkbox }) => /* @__PURE__ */ jsxs(
   "button",
   {
     onClick: checkbox ? () => checkbox.onChange(!checkbox.checked) : onClick,
-    className: `group w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-colors duration-200 ${isSelected ? "bg-surface-2/50 text-ink-primary" : "bg-surface-2/15 text-ink-secondary hover:bg-surface-2/35"}`,
+    className: `group w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-colors duration-200 ${isSelected ? "bg-surface-2/50 text-ink-primary light:bg-surface-3 light:shadow-token-sm" : "bg-surface-2/15 text-ink-secondary hover:bg-surface-2/35"}`,
     children: [
       checkbox ? /* @__PURE__ */ jsx("div", { className: "flex-shrink-0 flex items-center", onClick: (e) => {
         e.stopPropagation();
@@ -1490,9 +1490,9 @@ function MasterDetail({
 }
 var colorConfig = {
   default: { bg: "bg-surface-2/40", text: "text-ink-primary", iconBg: "bg-surface-3", iconColor: "text-brand" },
-  success: { bg: "bg-status-ok/10", text: "text-status-ok", iconBg: "bg-status-ok/20", iconColor: "text-status-ok" },
-  warning: { bg: "bg-status-warn/10", text: "text-status-warn", iconBg: "bg-status-warn/20", iconColor: "text-status-warn" },
-  danger: { bg: "bg-status-pending/10", text: "text-status-pending", iconBg: "bg-status-pending/20", iconColor: "text-status-pending" }
+  success: { bg: "bg-status-ok/10", text: "text-status-ok light:text-ink-primary", iconBg: "bg-status-ok/20", iconColor: "text-status-ok" },
+  warning: { bg: "bg-status-warn/10", text: "text-status-warn light:text-ink-primary", iconBg: "bg-status-warn/20", iconColor: "text-status-warn" },
+  danger: { bg: "bg-status-pending/10", text: "text-status-pending light:text-ink-primary", iconBg: "bg-status-pending/20", iconColor: "text-status-pending" }
 };
 var StatCard = ({ label, value, icon, subtitle, color = "default" }) => {
   const cfg = colorConfig[color];
@@ -2044,11 +2044,11 @@ var Accordion = ({ sections, forceExpanded = false, rememberOpen = true, storage
       return next;
     });
   };
-  return /* @__PURE__ */ jsx("div", { className: "rounded-xl overflow-hidden border border-slate-700 flex-1 flex flex-col min-h-0", children: sections.map((section) => {
+  return /* @__PURE__ */ jsx("div", { className: "rounded-xl overflow-hidden border border-edge-subtle/20 bg-surface-1 shadow-token-sm flex-1 flex flex-col min-h-0", children: sections.map((section) => {
     const colors = section.colors ?? DEFAULT_COLORS2;
     const isExpanded = forceExpanded || openId === section.id;
     const contentId = `section-content-${section.id}`;
-    return /* @__PURE__ */ jsxs("div", { className: `border-b border-slate-700 last:border-b-0 flex flex-col ${isExpanded ? "flex-1 min-h-0" : ""}`, children: [
+    return /* @__PURE__ */ jsxs("div", { className: `border-b border-edge-subtle/10 last:border-b-0 flex flex-col ${isExpanded ? "flex-1 min-h-0" : ""}`, children: [
       /* @__PURE__ */ jsxs(
         "button",
         {
@@ -2060,7 +2060,7 @@ var Accordion = ({ sections, forceExpanded = false, rememberOpen = true, storage
             /* @__PURE__ */ jsx(sectionicon_default, { colors, icon: section.icon, size: 14, containerSize: "sm" }),
             /* @__PURE__ */ jsxs("div", { className: "flex-1 min-w-0 text-left flex items-baseline gap-1.5", children: [
               /* @__PURE__ */ jsx("div", { className: `font-semibold text-sm truncate ${colors.text}`, children: section.number ? `${section.number}. ${section.title}` : section.title }),
-              section.subtitle && /* @__PURE__ */ jsx("div", { className: "text-[10px] text-gray-400 shrink-0", children: section.subtitle })
+              section.subtitle && /* @__PURE__ */ jsx("div", { className: "text-[10px] text-ink-tertiary shrink-0", children: section.subtitle })
             ] }),
             !forceExpanded && /* @__PURE__ */ jsx(
               icon_default,
@@ -2239,10 +2239,10 @@ var Tabs = ({
             "font-semibold transition-all duration-200 cursor-pointer select-none",
             "truncate whitespace-nowrap overflow-hidden",
             sizeConfig3.button,
-            dark ? isActive ? "bg-brand text-brand-contrast shadow-sm border border-transparent" : "text-ink-tertiary hover:text-ink-primary border border-edge-subtle/15" : isActive ? "bg-white text-theme-700 shadow-sm border border-transparent" : "text-gray-500 hover:text-gray-700 border border-gray-200"
+            dark ? isActive ? "bg-brand text-brand-contrast light:text-white shadow-sm border border-transparent" : "text-ink-tertiary hover:text-ink-primary border border-edge-subtle/15" : isActive ? "bg-white text-theme-700 shadow-sm border border-transparent" : "text-gray-500 hover:text-gray-700 border border-gray-200"
           ].join(" "),
           children: [
-            tab.icon && /* @__PURE__ */ jsx(icon_default, { name: tab.icon, size: sizeConfig3.icon, className: `flex-shrink-0 ${dark ? isActive ? "text-brand-contrast" : "text-ink-tertiary" : isActive ? "text-theme-500" : "text-gray-400"}` }),
+            tab.icon && /* @__PURE__ */ jsx(icon_default, { name: tab.icon, size: sizeConfig3.icon, className: `flex-shrink-0 ${dark ? isActive ? "text-brand-contrast light:text-white" : "text-ink-tertiary" : isActive ? "text-theme-500" : "text-gray-400"}` }),
             /* @__PURE__ */ jsxs("span", { className: "truncate", title: tab.label, children: [
               tab.label,
               sfx || ""
@@ -2500,8 +2500,8 @@ function DragHere2({ size = "lg" }) {
     ] }) })
   ] });
 }
-var PillTag = ({ children, grip }) => /* @__PURE__ */ jsxs("div", { className: "inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-white border border-gray-200 text-gray-700", children: [
-  grip && /* @__PURE__ */ jsx(icon_default, { name: "GripVertical", size: 12, className: "text-gray-400" }),
+var PillTag = ({ children, grip }) => /* @__PURE__ */ jsxs("div", { className: "inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-surface-2 border border-edge-subtle/15 text-ink-secondary", children: [
+  grip && /* @__PURE__ */ jsx(icon_default, { name: "GripVertical", size: 12, className: "text-ink-tertiary" }),
   /* @__PURE__ */ jsx("span", { className: "truncate", children })
 ] });
 var pilltag_default = PillTag;
