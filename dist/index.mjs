@@ -2116,8 +2116,8 @@ var ToolbarButton = ({
   const btnRef = useRef(null);
   const disabledStyle = disabled ? disabledEffect : "";
   const isIconOnly = color !== void 0;
-  const variantStyles = color && color !== "default" ? colorStyles[color] : variant === "light" ? "bg-white hover:bg-gray-50 text-theme-700 hover:text-theme-800" : isIconOnly ? "text-ink-secondary hover:text-ink-primary hover:bg-surface-3" : "bg-surface-3 hover:bg-surface-4 text-ink-secondary hover:text-ink-primary";
-  const activeStyles = variant === "light" ? "bg-gray-100 text-theme-600" : "bg-surface-4 text-ink-primary";
+  const variantStyles = color && color !== "default" ? colorStyles[color] : variant === "light" ? "bg-surface-4 hover:bg-surface-3 text-ink-secondary hover:text-ink-primary" : isIconOnly ? "text-ink-secondary hover:text-ink-primary hover:bg-surface-3" : "bg-surface-3 hover:bg-surface-4 text-ink-secondary hover:text-ink-primary";
+  const activeStyles = variant === "light" ? "bg-surface-3 text-ink-primary" : "bg-surface-4 text-ink-primary";
   return /* @__PURE__ */ jsxs(
     "button",
     {
