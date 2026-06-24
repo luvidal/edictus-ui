@@ -130,7 +130,7 @@ export default function MasterDetail({
         </div>
 
         {/* Detail panel - rounded, elevated */}
-        <div className="flex-1 min-w-0 h-full flex flex-col overflow-hidden bg-white rounded-r-xl">
+        <div className="flex-1 min-w-0 h-full flex flex-col overflow-hidden bg-surface-1 rounded-r-xl">
           {hasSelection && detail ? (
             detail
           ) : isInitialLoading ? (
@@ -186,7 +186,7 @@ export default function MasterDetail({
       )}
 
       {/* Content */}
-      <div className="flex-1 min-h-0 bg-white overflow-hidden">
+      <div className="flex-1 min-h-0 bg-surface-1 overflow-hidden">
         {hasSelection && detail ? detail : <div className="h-full overflow-auto">{list}</div>}
       </div>
     </div>

@@ -153,9 +153,9 @@ const Tabs = ({
                                 sizeConfig.button,
                                 dark
                                     ? (isActive
-                                        // light:text-white — white-on-brand reads as a primary "pill" in light;
-                                        // dark keeps the AA-optimal --brand-contrast (see docs/ref/theme-contrast.md)
-                                        ? 'bg-brand text-brand-contrast light:text-white shadow-sm border border-transparent'
+                                        // text-brand-on — per-tenant CTA foreground on the brand pill (white on a
+                                        // saturated brand in light, AA-dark in dark, pale-safe; see docs/ref/theme-contrast.md)
+                                        ? 'bg-brand text-brand-on shadow-sm border border-transparent'
                                         : 'text-ink-tertiary hover:text-ink-primary border border-edge-subtle/15')
                                     : (isActive
                                         ? 'bg-white text-theme-700 shadow-sm border border-transparent'
@@ -165,7 +165,7 @@ const Tabs = ({
                             {tab.icon && (
                                 <Icon name={tab.icon} size={sizeConfig.icon} className={`flex-shrink-0 ${
                                     dark
-                                        ? (isActive ? 'text-brand-contrast light:text-white' : 'text-ink-tertiary')
+                                        ? (isActive ? 'text-brand-on' : 'text-ink-tertiary')
                                         : (isActive ? 'text-theme-500' : 'text-gray-400')
                                 }`} />
                             )}

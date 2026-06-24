@@ -1467,7 +1467,7 @@ function MasterDetail({
           ]
         }
       ),
-      /* @__PURE__ */ jsx("div", { className: "flex-1 min-w-0 h-full flex flex-col overflow-hidden bg-white rounded-r-xl", children: hasSelection && detail ? detail : isInitialLoading ? detailLoadingContent : hasItems ? /* @__PURE__ */ jsx("div", { className: "h-full flex items-center justify-center bg-gradient-to-br from-theme-50 to-white", children: /* @__PURE__ */ jsxs("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsx("div", { className: "flex-1 min-w-0 h-full flex flex-col overflow-hidden bg-surface-1 rounded-r-xl", children: hasSelection && detail ? detail : isInitialLoading ? detailLoadingContent : hasItems ? /* @__PURE__ */ jsx("div", { className: "h-full flex items-center justify-center bg-gradient-to-br from-theme-50 to-white", children: /* @__PURE__ */ jsxs("div", { className: "text-center", children: [
         /* @__PURE__ */ jsx(icon_default, { name: "MousePointerClick", size: 32, className: "text-theme-300 mx-auto mb-2" }),
         /* @__PURE__ */ jsx("p", { className: "text-sm text-theme-400", children: "Seleccione un elemento" })
       ] }) }) : /* @__PURE__ */ jsx("div", { className: "h-full bg-gradient-to-br from-theme-50 to-white" }) })
@@ -1495,7 +1495,7 @@ function MasterDetail({
       ),
       showControls && sidebarHeader && /* @__PURE__ */ jsx("div", { className: "flex-shrink-0 px-4 pt-2 pb-4", children: sidebarHeader })
     ] }),
-    /* @__PURE__ */ jsx("div", { className: "flex-1 min-h-0 bg-white overflow-hidden", children: hasSelection && detail ? detail : /* @__PURE__ */ jsx("div", { className: "h-full overflow-auto", children: list }) })
+    /* @__PURE__ */ jsx("div", { className: "flex-1 min-h-0 bg-surface-1 overflow-hidden", children: hasSelection && detail ? detail : /* @__PURE__ */ jsx("div", { className: "h-full overflow-auto", children: list }) })
   ] });
 }
 var colorConfig = {
@@ -2146,7 +2146,7 @@ var ToolbarButton = ({
 };
 var toolbarbutton_default = ToolbarButton;
 var ButtonGroup = ({ children, className = "", variant = "dark" }) => {
-  const bg = variant === "dark" ? "bg-surface-2" : "bg-gray-200 shadow-sm";
+  const bg = variant === "dark" ? "bg-surface-2" : "bg-surface-2 shadow-token-sm";
   return /* @__PURE__ */ jsx(
     "div",
     {
@@ -2249,10 +2249,10 @@ var Tabs = ({
             "font-semibold transition-all duration-200 cursor-pointer select-none",
             "truncate whitespace-nowrap overflow-hidden",
             sizeConfig3.button,
-            dark ? isActive ? "bg-brand text-brand-contrast light:text-white shadow-sm border border-transparent" : "text-ink-tertiary hover:text-ink-primary border border-edge-subtle/15" : isActive ? "bg-white text-theme-700 shadow-sm border border-transparent" : "text-gray-500 hover:text-gray-700 border border-gray-200"
+            dark ? isActive ? "bg-brand text-brand-on shadow-sm border border-transparent" : "text-ink-tertiary hover:text-ink-primary border border-edge-subtle/15" : isActive ? "bg-white text-theme-700 shadow-sm border border-transparent" : "text-gray-500 hover:text-gray-700 border border-gray-200"
           ].join(" "),
           children: [
-            tab.icon && /* @__PURE__ */ jsx(icon_default, { name: tab.icon, size: sizeConfig3.icon, className: `flex-shrink-0 ${dark ? isActive ? "text-brand-contrast light:text-white" : "text-ink-tertiary" : isActive ? "text-theme-500" : "text-gray-400"}` }),
+            tab.icon && /* @__PURE__ */ jsx(icon_default, { name: tab.icon, size: sizeConfig3.icon, className: `flex-shrink-0 ${dark ? isActive ? "text-brand-on" : "text-ink-tertiary" : isActive ? "text-theme-500" : "text-gray-400"}` }),
             /* @__PURE__ */ jsxs("span", { className: "truncate", title: tab.label, children: [
               tab.label,
               sfx || ""
