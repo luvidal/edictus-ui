@@ -92,6 +92,9 @@ Tailwind config maps `theme-*` and `status-*` classes to these variables. Semant
 // Re-exports all components, hooks, and utilities from src/
 ```
 
+Retired exports: `MasterDetail` and `Container` are intentionally removed. Jogi
+uses its host AppShell master/detail layout; `Scroll` remains exported directly.
+
 ## Consumer Setup (jogi)
 
 ```ts

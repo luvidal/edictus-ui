@@ -42,7 +42,6 @@ export { default as Prompt } from './common/prompt'
 export type { PromptOptions } from './common/prompt'
 export { default as ContextMenu } from './common/contextmenu'
 export { default as CardList } from './common/cardlist'
-export { default as MasterDetail } from './common/masterdetail'
 export { default as StatCard } from './common/statcard'
 export { SidebarFilter, SidebarSort, SidebarPaginator } from './common/sidebarcontrols'
 export { default as DetailBar } from './common/detailbar'
@@ -70,8 +69,8 @@ export { default as Tabs } from './tabs'
 export { default as Panel } from './panel'
 export { default as TablePanel } from './panel/tablepanel'
 
-// ── Container ──
-export { default as Container, Scroll } from './container'
+// ── Scroll ──
+export { default as Scroll } from './container/scroll'
 
 // ── Animations ──
 export { default as Spinner } from './animations/spinner'

@@ -421,52 +421,6 @@ interface Props$3 {
 }
 declare function CardList({ items, selectedId, onSelect, checkedIds, onCheck }: Props$3): react_jsx_runtime.JSX.Element | null;
 
-interface MasterDetailProps {
-    /** Page title */
-    title: string;
-    /** Page icon name */
-    icon?: string;
-    /** The list/master panel content */
-    list: ReactNode;
-    /** The detail panel content (shown when item selected) */
-    detail: ReactNode | null;
-    /** Whether an item is currently selected */
-    hasSelection: boolean;
-    /** Width of sidebar on desktop (default: 280px) */
-    sidebarWidth?: number;
-    /** Action buttons shown in sidebar title area (desktop) - e.g., "Add new" button */
-    actions?: ReactNode;
-    /** Header content for the sidebar (filter, sort, etc) - only shown on desktop */
-    sidebarHeader?: ReactNode;
-    /** Footer content for the sidebar (paginator, etc) - only shown on desktop */
-    sidebarFooter?: ReactNode;
-    /** Toolbar content for mobile header */
-    mobileTbar?: ReactNode;
-    /** Extension content for mobile (sort options, etc) */
-    mobileExtension?: ReactNode;
-    /** Items array for auto-selection. Must have 'id' field. First item auto-selected on desktop. */
-    items?: readonly {
-        id: string | number;
-    }[];
-    /** Called when an item is auto-selected (first item on desktop load) */
-    onSelect?: (id: string | number) => void;
-    /** Detail loading placeholder */
-    detailLoading?: ReactNode;
-}
-/**
- * Responsive master-detail layout component.
- *
- * Desktop (≥1024px landscape): Full left-to-right layout
- *   - Sidebar with title, controls, list, paginator
- *   - Detail panel with rounded corners
- *
- * Mobile/Tablet: Traditional header + full-page switching
- *
- * Auto-selection: Pass `items` and `onSelect` to automatically select the first
- * item on desktop. The detail panel should never be empty if data exists.
- */
-declare function MasterDetail({ title, icon, list, detail, hasSelection, sidebarWidth, actions, sidebarHeader, sidebarFooter, mobileTbar, items, onSelect, detailLoading, }: MasterDetailProps): react_jsx_runtime.JSX.Element;
-
 type Color = 'default' | 'success' | 'warning' | 'danger';
 interface Props$2 {
     label: string;
@@ -704,13 +658,6 @@ interface ScrollProps {
     grid?: boolean;
 }
 declare const Scroll: ({ children, className, grid }: ScrollProps) => react_jsx_runtime.JSX.Element;
-
-interface ContainerProps {
-    title?: string;
-    icon?: string;
-    children: React__default.ReactNode;
-}
-declare const Container: ({ title, icon, children }: ContainerProps) => react_jsx_runtime.JSX.Element;
 
 type Size$1 = 'xs' | 'sm' | 'md' | 'lg';
 interface SpinnerProps {
@@ -983,4 +930,4 @@ interface UploadCardsProps {
 }
 declare function UploadCards({ items, summary, requestLabel, role, labels: userLabels }: UploadCardsProps): react_jsx_runtime.JSX.Element;
 
-export { Accordion, Anchor, Button, ButtonGroup, type CapturedTransfer, Card, type CardItem, CardList, Checkbox, ColorPicker, ComputedField, ConfirmDialog as Confirm, type ConfirmOptions, Container, ContextMenu, DetailBar, DetailContent, DragHere$1 as DragHereHint, DragHere as DragHereOverlay, EditableTitle, EmailLink, EmptyState, type FenceRect, FieldWrapper, type FileStatus, type FileUploadItem, Icon, Label, LogoUpload, MasterDetail, Modal, ModalFormLayout, ModalOverlayPanel, ModalToolbar, type MultiSelectState, MultiselectToolbar, NumberField, Panel, PillTag, ProgressRing, PromptDialog as Prompt, type PromptOptions, RTFEditor, Radio, type RefreshActions, Scroll, type Section, SectionSeparator, Select, SelectField, SidebarFilter, SidebarPaginator, SidebarSort, Skeleton, type SortOption, Spinner, StatCard, TablePanel, Tabs, TextField, ToastContainer, type ToastData, ToastProvider, ToolBack, ToolbarButton, Tooltip, UploadCards, type UploadCardsLabels, type UploadFlowLabels, type UploadFlowOptions, type UploadSummary, type UploadToast, type UseFenceSelectOptions, type UseFenceSelectResult, type UseRecordsOptions, type UseRecordsReturn, captureDataTransfer, createDialogContext, openFilePicker, resolveFiles, useFenceSelect, useIsDesktop, useIsMobile, useMultiSelect, useRecords, useToast, useUploadFlow };
+export { Accordion, Anchor, Button, ButtonGroup, type CapturedTransfer, Card, type CardItem, CardList, Checkbox, ColorPicker, ComputedField, ConfirmDialog as Confirm, type ConfirmOptions, ContextMenu, DetailBar, DetailContent, DragHere$1 as DragHereHint, DragHere as DragHereOverlay, EditableTitle, EmailLink, EmptyState, type FenceRect, FieldWrapper, type FileStatus, type FileUploadItem, Icon, Label, LogoUpload, Modal, ModalFormLayout, ModalOverlayPanel, ModalToolbar, type MultiSelectState, MultiselectToolbar, NumberField, Panel, PillTag, ProgressRing, PromptDialog as Prompt, type PromptOptions, RTFEditor, Radio, type RefreshActions, Scroll, type Section, SectionSeparator, Select, SelectField, SidebarFilter, SidebarPaginator, SidebarSort, Skeleton, type SortOption, Spinner, StatCard, TablePanel, Tabs, TextField, ToastContainer, type ToastData, ToastProvider, ToolBack, ToolbarButton, Tooltip, UploadCards, type UploadCardsLabels, type UploadFlowLabels, type UploadFlowOptions, type UploadSummary, type UploadToast, type UseFenceSelectOptions, type UseFenceSelectResult, type UseRecordsOptions, type UseRecordsReturn, captureDataTransfer, createDialogContext, openFilePicker, resolveFiles, useFenceSelect, useIsDesktop, useIsMobile, useMultiSelect, useRecords, useToast, useUploadFlow };

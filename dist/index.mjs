@@ -1403,101 +1403,6 @@ function CardList({ items, selectedId, onSelect, checkedIds, onCheck }) {
     item.id
   )) });
 }
-function MasterDetail({
-  title,
-  icon,
-  list,
-  detail,
-  hasSelection,
-  sidebarWidth = 280,
-  actions,
-  sidebarHeader,
-  sidebarFooter,
-  mobileTbar,
-  items,
-  onSelect,
-  detailLoading
-}) {
-  const isDesktop = useIsDesktop();
-  const [showControls, setShowControls] = useState(false);
-  useEffect(() => {
-    if (isDesktop && !hasSelection && items?.length && onSelect) {
-      onSelect(items[0].id);
-    }
-  }, [isDesktop, hasSelection, items, onSelect]);
-  const hasControls = sidebarHeader || sidebarFooter;
-  const hasItems = (items?.length ?? 0) > 0;
-  const isInitialLoading = items === void 0;
-  const detailLoadingContent = detailLoading ?? /* @__PURE__ */ jsxs("div", { className: "h-full flex flex-col gap-6 p-6 bg-gradient-to-br from-theme-50 to-white", children: [
-    /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
-      /* @__PURE__ */ jsx("div", { className: "animate-shimmer rounded h-5 w-40" }),
-      /* @__PURE__ */ jsx("div", { className: "animate-shimmer rounded h-3 w-24" })
-    ] }),
-    /* @__PURE__ */ jsx(skeleton_default.Form, { rows: 5 })
-  ] });
-  if (isDesktop) {
-    return /* @__PURE__ */ jsxs("div", { className: "h-full flex rounded-xl overflow-hidden", children: [
-      /* @__PURE__ */ jsxs(
-        "div",
-        {
-          className: "h-full flex-shrink-0 flex flex-col bg-gradient-to-b from-theme-700 to-theme-800",
-          style: { width: sidebarWidth },
-          children: [
-            /* @__PURE__ */ jsxs("div", { className: "flex items-center justify-between gap-3 px-4 py-3", children: [
-              /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3", children: [
-                icon && /* @__PURE__ */ jsx(icon_default, { name: icon, size: 22, className: "text-white/80" }),
-                /* @__PURE__ */ jsx("span", { className: "text-lg font-bold uppercase tracking-wide text-white", children: title })
-              ] }),
-              actions && /* @__PURE__ */ jsx("div", { className: "flex-shrink-0", children: actions })
-            ] }),
-            hasControls && /* @__PURE__ */ jsx(
-              "button",
-              {
-                onClick: () => setShowControls(!showControls),
-                className: "flex items-center justify-end h-9 px-4 hover:bg-white/5 transition-colors",
-                children: /* @__PURE__ */ jsxs("span", { className: "flex items-center gap-1.5 text-[11px] text-white/50 uppercase tracking-wider", children: [
-                  /* @__PURE__ */ jsx(icon_default, { name: showControls ? "ChevronUp" : "SlidersHorizontal", size: 12 }),
-                  "Filtros"
-                ] })
-              }
-            ),
-            showControls && sidebarHeader && /* @__PURE__ */ jsx("div", { className: "flex-shrink-0 px-4 py-3 border-b border-white/10", children: sidebarHeader }),
-            /* @__PURE__ */ jsx("div", { className: "flex-1 min-h-0 overflow-auto", children: list }),
-            sidebarFooter && /* @__PURE__ */ jsx("div", { className: "flex-shrink-0 px-3 py-2", children: sidebarFooter })
-          ]
-        }
-      ),
-      /* @__PURE__ */ jsx("div", { className: "flex-1 min-w-0 h-full flex flex-col overflow-hidden bg-surface-1 rounded-r-xl", children: hasSelection && detail ? detail : isInitialLoading ? detailLoadingContent : hasItems ? /* @__PURE__ */ jsx("div", { className: "h-full flex items-center justify-center bg-gradient-to-br from-theme-50 to-white", children: /* @__PURE__ */ jsxs("div", { className: "text-center", children: [
-        /* @__PURE__ */ jsx(icon_default, { name: "MousePointerClick", size: 32, className: "text-theme-300 mx-auto mb-2" }),
-        /* @__PURE__ */ jsx("p", { className: "text-sm text-theme-400", children: "Seleccione un elemento" })
-      ] }) }) : /* @__PURE__ */ jsx("div", { className: "h-full bg-gradient-to-br from-theme-50 to-white" }) })
-    ] });
-  }
-  return /* @__PURE__ */ jsxs("div", { className: "h-full flex flex-col overflow-hidden", children: [
-    !hasSelection && /* @__PURE__ */ jsxs("header", { className: "flex-shrink-0 flex flex-col bg-gradient-to-r from-theme-700 to-theme-600", children: [
-      /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 px-4 py-3", children: [
-        /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3", children: [
-          icon && /* @__PURE__ */ jsx(icon_default, { name: icon, size: 22, className: "text-theme-100 icon-shadow-md" }),
-          /* @__PURE__ */ jsx("span", { className: "text-xl font-bold uppercase tracking-wide text-theme-100 text-shadow-md", children: title })
-        ] }),
-        /* @__PURE__ */ jsx("div", { className: "flex-1 flex justify-end gap-2", children: mobileTbar })
-      ] }),
-      hasControls && /* @__PURE__ */ jsx(
-        "button",
-        {
-          onClick: () => setShowControls(!showControls),
-          className: "flex items-center justify-end h-9 px-4 hover:bg-white/5 transition-colors",
-          children: /* @__PURE__ */ jsxs("span", { className: "flex items-center gap-1.5 text-[11px] text-white/50 uppercase tracking-wider", children: [
-            /* @__PURE__ */ jsx(icon_default, { name: showControls ? "ChevronUp" : "SlidersHorizontal", size: 12 }),
-            "Filtros"
-          ] })
-        }
-      ),
-      showControls && sidebarHeader && /* @__PURE__ */ jsx("div", { className: "flex-shrink-0 px-4 pt-2 pb-4", children: sidebarHeader })
-    ] }),
-    /* @__PURE__ */ jsx("div", { className: "flex-1 min-h-0 bg-surface-1 overflow-hidden", children: hasSelection && detail ? detail : /* @__PURE__ */ jsx("div", { className: "h-full overflow-auto", children: list }) })
-  ] });
-}
 var colorConfig = {
   default: { bg: "bg-surface-2/40", text: "text-ink-primary", iconBg: "bg-surface-3", iconColor: "text-brand" },
   success: { bg: "bg-status-ok/10", text: "text-status-ok light:text-ink-primary", iconBg: "bg-status-ok/20", iconColor: "text-status-ok" },
@@ -2380,18 +2285,6 @@ var Scroll = ({ children, className = "", grid = false }) => {
   return /* @__PURE__ */ jsx("div", { className: `flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col ${layout} ${className}`, children });
 };
 var scroll_default = Scroll;
-var Container = ({ title, icon, children }) => {
-  const horizontalr = "gap-2 sm:gap-4 px-4 sm:px-5 md:px-6";
-  const verticalr = "py-2 short:py-3 mid:py-3 tall:py-4 xtall:py-5";
-  return /* @__PURE__ */ jsxs("div", { className: "flex flex-col h-full shadow-2xl lg:rounded-xl overflow-hidden", children: [
-    /* @__PURE__ */ jsx("header", { className: `flex flex-col text-lg sm:text-xl ${horizontalr} ${verticalr} flex-shrink-0 bg-gradient-to-r from-theme-700 to-theme-600`, children: /* @__PURE__ */ jsx("div", { className: "group/header flex items-center gap-4 sm:gap-8", children: /* @__PURE__ */ jsxs("span", { className: "flex items-center gap-3 whitespace-nowrap text-theme-100", children: [
-      icon && /* @__PURE__ */ jsx(icon_default, { name: icon, className: "hidden sm:inline-block size-[20px] md:size-[22px] lg:size-[24px] text-theme-100 icon-shadow-md" }),
-      /* @__PURE__ */ jsx("span", { className: "text-xl md:text-2xl font-bold uppercase tracking-wide text-theme-100 text-shadow-md", children: title })
-    ] }) }) }),
-    /* @__PURE__ */ jsx("div", { className: "flex-1 min-h-0 flex flex-col bg-white", children })
-  ] });
-};
-var container_default = Container;
 var sizeConfig = {
   xs: { spinner: 20, stroke: 2, text: "text-xs" },
   sm: { spinner: 28, stroke: 2.5, text: "text-sm" },
@@ -3285,6 +3178,6 @@ function UploadCards({ items, summary, requestLabel, role, labels: userLabels })
   ] }) });
 }
 
-export { section_default as Accordion, anchor_default as Anchor, button_default as Button, buttongroup_default as ButtonGroup, card_default as Card, CardList, checkbox_default as Checkbox, colorpicker_default as ColorPicker, computedfield_default as ComputedField, confirm_default as Confirm, container_default as Container, contextmenu_default as ContextMenu, DetailBar, DetailContent, dragherehint_default as DragHereHint, DragHere2 as DragHereOverlay, editabletitle_default as EditableTitle, emaillink_default as EmailLink, emptystate_default as EmptyState, FieldWrapper, icon_default as Icon, label_default as Label, logoupload_default as LogoUpload, MasterDetail, modal_default as Modal, modalformlayout_default as ModalFormLayout, modaloverlaypanel_default as ModalOverlayPanel, modaltoolbar_default as ModalToolbar, MultiselectToolbar, numberfield_default as NumberField, panel_default as Panel, pilltag_default as PillTag, progressring_default as ProgressRing, prompt_default as Prompt, rtfeditor_default as RTFEditor, radio_default as Radio, scroll_default as Scroll, SectionSeparator, select_default as Select, selectfield_default as SelectField, SidebarFilter, SidebarPaginator, SidebarSort, skeleton_default as Skeleton, Spinner, statcard_default as StatCard, tablepanel_default as TablePanel, tabs_default as Tabs, textfield_default as TextField, ToastContainer, ToastProvider, toolback_default as ToolBack, toolbarbutton_default as ToolbarButton, tooltip_default as Tooltip, UploadCards, captureDataTransfer, createDialogContext, openFilePicker, resolveFiles, useFenceSelect, useIsDesktop, useIsMobile, useMultiSelect, useRecords, useToast, useUploadFlow };
+export { section_default as Accordion, anchor_default as Anchor, button_default as Button, buttongroup_default as ButtonGroup, card_default as Card, CardList, checkbox_default as Checkbox, colorpicker_default as ColorPicker, computedfield_default as ComputedField, confirm_default as Confirm, contextmenu_default as ContextMenu, DetailBar, DetailContent, dragherehint_default as DragHereHint, DragHere2 as DragHereOverlay, editabletitle_default as EditableTitle, emaillink_default as EmailLink, emptystate_default as EmptyState, FieldWrapper, icon_default as Icon, label_default as Label, logoupload_default as LogoUpload, modal_default as Modal, modalformlayout_default as ModalFormLayout, modaloverlaypanel_default as ModalOverlayPanel, modaltoolbar_default as ModalToolbar, MultiselectToolbar, numberfield_default as NumberField, panel_default as Panel, pilltag_default as PillTag, progressring_default as ProgressRing, prompt_default as Prompt, rtfeditor_default as RTFEditor, radio_default as Radio, scroll_default as Scroll, SectionSeparator, select_default as Select, selectfield_default as SelectField, SidebarFilter, SidebarPaginator, SidebarSort, skeleton_default as Skeleton, Spinner, statcard_default as StatCard, tablepanel_default as TablePanel, tabs_default as Tabs, textfield_default as TextField, ToastContainer, ToastProvider, toolback_default as ToolBack, toolbarbutton_default as ToolbarButton, tooltip_default as Tooltip, UploadCards, captureDataTransfer, createDialogContext, openFilePicker, resolveFiles, useFenceSelect, useIsDesktop, useIsMobile, useMultiSelect, useRecords, useToast, useUploadFlow };
 //# sourceMappingURL=index.mjs.map
 //# sourceMappingURL=index.mjs.map
