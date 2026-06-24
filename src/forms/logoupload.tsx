@@ -132,7 +132,7 @@ const LogoUpload = ({
             <button
               type='button'
               onClick={handleRemove}
-              className='absolute top-2 right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors'
+              className='absolute top-2 right-2 w-6 h-6 bg-status-danger rounded-full flex items-center justify-center text-white hover:bg-status-danger/90 transition-colors'
               aria-label='Eliminar logo'
             >
               <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' className='w-4 h-4'>
@@ -159,7 +159,7 @@ const LogoUpload = ({
           className='hidden'
         />
       </div>
-      {error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
+      {error && <p className='text-status-danger text-sm mt-2'>{error}</p>}
     </FieldWrapper>
   )
 }

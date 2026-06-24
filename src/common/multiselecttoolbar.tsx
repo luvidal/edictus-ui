@@ -77,7 +77,7 @@ export function MultiselectToolbar({ state, variant }: MultiselectToolbarProps) 
         )}
         <span
           onClick={checkedIds.size > 0 ? handleBulkDelete : undefined}
-          className={`flex items-center transition-colors ${checkedIds.size > 0 ? 'text-status-pending cursor-pointer hover:text-status-pending/80' : 'text-ink-disabled cursor-not-allowed'}`}
+          className={`flex items-center transition-colors ${checkedIds.size > 0 ? 'text-status-danger cursor-pointer hover:text-status-danger/80' : 'text-ink-disabled cursor-not-allowed'}`}
           title='Eliminar seleccionados'
         >
           <Icon name='Trash2' size={14} />

@@ -109,6 +109,7 @@ Tailwind config maps `theme-*` and `status-*` classes to these variables. Semant
 - Components are themeable via CSS variables, not props (except semantic colors)
 - No component imports domain data — all customization via props
 - `lucide-react` is a peer dependency — consumers provide it
+- `Button` has token-driven `variant` (primary/secondary/ghost/danger/link, default primary) + `size` (sm/md) chrome; primary uses `bg-brand` + `text-brand-on` (host `--brand-on`: white on a saturated brand in light, AA-dark in dark, pale-safe) + token shadows. Preserves caller-provided label casing; disabled state dims only inner content (`opacity-70`) while outer chrome stays unchanged (the DIRECTIVE).
 
 ## ContextMenu Contract
 

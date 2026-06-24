@@ -1,7 +1,7 @@
 import { createRoot, Root } from 'react-dom/client'
 import { act, type ReactElement } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { ComputedField, NumberField, TextField } from '../src'
+import { Button, ComputedField, NumberField, TextField } from '../src'
 
 let root: Root | null = null
 let container: HTMLDivElement | null = null
@@ -35,6 +35,66 @@ afterEach(() => {
 })
 
 describe('form fields', () => {
+  it('renders Button with semantic brand chrome (default primary) and caller-provided casing', () => {
+    const node = render(<Button icon="Play" text="Enviar" />)
+    const button = node.querySelector('button')!
+    const label = button.querySelector('span')!
+    const icon = button.querySelector('svg')!
+
+    expect(button.className).toContain('bg-brand')
+    expect(button.className).toContain('text-brand-on') // per-tenant CTA contrast (white on saturated brand in light, pale-safe)
+    expect(button.className).toContain('shadow-token-sm')
+    expect(button.className).not.toContain('bg-theme-700')
+    expect(label.textContent).toBe('Enviar')
+    expect(label.className).not.toContain('uppercase')
+    expect(label.className).not.toContain('text-shadow')
+    expect(icon.getAttribute('class')).not.toContain('text-shadow')
+  })
+
+  it('maps variant + size to token chrome (primary default, secondary, danger, sm)', () => {
+    const primary = render(<Button text="A" />).querySelector('button')!
+    expect(primary.className).toContain('bg-brand')
+    expect(primary.className).toContain('text-brand-on')
+    expect(primary.className).toContain('h-10') // md default
+
+    const secondary = render(<Button text="B" variant="secondary" />).querySelector('button')!
+    expect(secondary.className).toContain('bg-surface-2')
+    expect(secondary.className).toContain('text-ink-primary')
+    expect(secondary.className).not.toContain('bg-brand')
+
+    const danger = render(<Button text="C" variant="danger" />).querySelector('button')!
+    expect(danger.className).toContain('bg-status-danger')
+    expect(danger.className).not.toContain('bg-status-pending') // true red, never rose
+
+    const small = render(<Button text="D" size="sm" />).querySelector('button')!
+    expect(small.className).toContain('h-8')
+    expect(small.className).not.toContain('h-10')
+  })
+
+  it('holds the disabled DIRECTIVE across every variant (chrome stable, content dims)', () => {
+    for (const variant of ['primary', 'secondary', 'ghost', 'danger', 'link'] as const) {
+      const button = render(<Button text="x" variant={variant} disabled />).querySelector('button')!
+      expect(button.className, variant).toContain('disabled:cursor-not-allowed')
+      expect(button.className, variant).not.toContain('disabled:opacity')
+      expect(button.querySelector('span')!.className, variant).toContain('opacity-70')
+    }
+  })
+
+  it('keeps Button disabled chrome stable while dimming inner content', () => {
+    const node = render(<Button icon="Play" text="Enviar" disabled />)
+    const button = node.querySelector('button')!
+    const label = button.querySelector('span')!
+    const icon = button.querySelector('svg')!
+
+    expect(button.disabled).toBe(true)
+    expect(button.className).toContain('disabled:cursor-not-allowed')
+    expect(button.className).not.toContain('disabled:opacity')
+    expect(button.className).not.toContain('grayscale')
+    expect(button.className).not.toContain('blur')
+    expect(label.className).toContain('opacity-70')
+    expect(icon.getAttribute('class')).toContain('opacity-70')
+  })
+
   it('renders TextField suffix with reserved input padding', () => {
     const node = render(<TextField aria-label="ratio" value="25" suffix="%" onChange={() => undefined} />)
     const input = node.querySelector('input')!

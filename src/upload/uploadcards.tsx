@@ -40,7 +40,7 @@ const statusConfig: Record<string, { icon: string; color: string; spin?: boolean
   detected:    { icon: 'Sparkles',   color: 'text-theme-300' },
   linking:     { icon: 'Link',       color: 'text-theme-400' },
   done:        { icon: 'Check',      color: 'text-status-ok' },
-  error:       { icon: 'X',          color: 'text-status-pending' },
+  error:       { icon: 'X',          color: 'text-status-danger' },
 }
 
 const fileIcon = (filename: string) => {
@@ -91,7 +91,7 @@ function StatusLabel({ item, requestLabel, role, labels }: { item: FileUploadIte
   const getLinkingLabel = labels.linkingLabel ?? defaultLinkingLabel
   const getDetectedLabel = labels.detectedLabel ?? defaultDetectedLabel
 
-  if (item.status === 'error') return <span className='text-xs text-status-pending'>{item.error || 'Error'}</span>
+  if (item.status === 'error') return <span className='text-xs text-status-danger'>{item.error || 'Error'}</span>
   if (item.status === 'detected') return <span className='text-xs text-theme-300 font-medium'>{getDetectedLabel(item.detectedTypes, item.detectedCount)}</span>
   if (item.status === 'linking') return <span className='text-xs text-theme-400'>{getLinkingLabel(requestLabel, role)}</span>
   // For non-expanded done items with detected types, show what was found instead of generic "Done"
@@ -106,12 +106,12 @@ function ProgressBar({ item }: { item: FileUploadItem }) {
   const isError = item.status === 'error'
 
   const barColor = isError
-    ? 'bg-status-pending'
+    ? 'bg-status-danger'
     : isDone
     ? 'bg-status-ok'
     : 'bg-theme-400'
 
-  const trackColor = isError ? 'bg-status-pending/20' : isDone ? 'bg-status-ok/20' : 'bg-theme-950/40'
+  const trackColor = isError ? 'bg-status-danger/20' : isDone ? 'bg-status-ok/20' : 'bg-theme-950/40'
 
   return (
     <div className={`h-1 rounded-full overflow-hidden ${trackColor}`}>

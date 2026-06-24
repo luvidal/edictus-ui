@@ -2,6 +2,12 @@
 
 Shared form primitives route labels and visibility through `FieldWrapper`.
 
+## Button
+
+- `Button` is the primary action control. Token-driven `variant` (primary/secondary/ghost/danger/link) + `size` (sm/md); primary uses semantic brand tokens (`bg-brand`, `text-brand-on`, `hover:bg-brand-hover`) and token shadows, not raw theme ramp classes.
+- Button labels render with caller-provided casing. Do not force uppercase or add text-shadow.
+- Disabled buttons keep the same outer chrome and only dim inner content with `opacity-70`.
+
 ## Field suffixes
 
 - `TextField`, `NumberField`, and `ComputedField` support `suffix` for units such as `%`, `UF`, or `m²`.

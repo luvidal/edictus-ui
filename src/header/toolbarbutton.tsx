@@ -17,7 +17,7 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onC
 const colorStyles = {
     default: '',
     amber: 'text-status-warn hover:text-status-warn/80 hover:bg-status-warn/30',
-    red: 'text-status-pending hover:text-status-pending/80 hover:bg-status-pending/30',
+    red: 'text-status-danger hover:text-status-danger/80 hover:bg-status-danger/30',
 }
 
 const ToolbarButton = ({

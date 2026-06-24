@@ -1,7 +1,7 @@
 export const variantConfig = {
   danger: {
     icon: 'Trash2',
-    iconBg: 'bg-status-danger/10',
+    iconBg: 'bg-ink-primary/10',
     iconColor: 'text-status-danger',
     confirmBg: 'bg-status-danger hover:bg-status-danger/90',
   },

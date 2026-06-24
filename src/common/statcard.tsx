@@ -18,7 +18,7 @@ const colorConfig: Record<Color, { bg: string; text: string; iconBg: string; ico
     default:  { bg: 'bg-surface-2/40',       text: 'text-ink-primary',                              iconBg: 'bg-surface-3',         iconColor: 'text-brand' },
     success:  { bg: 'bg-status-ok/10',       text: 'text-status-ok light:text-ink-primary',         iconBg: 'bg-status-ok/20',      iconColor: 'text-status-ok' },
     warning:  { bg: 'bg-status-warn/10',     text: 'text-status-warn light:text-ink-primary',       iconBg: 'bg-status-warn/20',    iconColor: 'text-status-warn' },
-    danger:   { bg: 'bg-status-pending/10',  text: 'text-status-pending light:text-ink-primary',    iconBg: 'bg-status-pending/20', iconColor: 'text-status-pending' },
+    danger:   { bg: 'bg-status-danger/10',   text: 'text-status-danger light:text-ink-primary',     iconBg: 'bg-status-danger/20',  iconColor: 'text-status-danger' },
 }
 
 const StatCard = ({ label, value, icon, subtitle, color = 'default' }: Props) => {

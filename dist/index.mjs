@@ -101,21 +101,32 @@ var Icon = ({ name, ...props }) => {
   return /* @__PURE__ */ jsx(Component, { ...props });
 };
 var icon_default = Icon;
-var Button = ({ icon, text, loading = false, className = "", ...props }) => {
+var VARIANT_CHROME = {
+  primary: "bg-brand text-brand-on border-transparent shadow-token-sm enabled:hover:bg-brand-hover enabled:hover:shadow-token-md",
+  secondary: "bg-surface-2 text-ink-primary border-transparent shadow-token-sm enabled:hover:bg-surface-3",
+  ghost: "bg-transparent text-ink-secondary border-transparent enabled:hover:bg-surface-2/40",
+  danger: "bg-status-danger text-white border-transparent shadow-token-sm enabled:hover:bg-status-danger/90",
+  link: "bg-transparent text-brand border-transparent underline underline-offset-2 enabled:hover:text-brand-hover"
+};
+var SIZE_CHROME = {
+  md: "h-10 px-5 text-sm",
+  sm: "h-8 px-3 text-xs"
+};
+var Button = ({ icon, text, loading = false, variant = "primary", size = "md", className = "", ...props }) => {
   const isDisabled = props.disabled || loading;
-  const disabledText = isDisabled ? "opacity-40" : "";
+  const disabledContent = isDisabled ? "opacity-70" : "";
   return /* @__PURE__ */ jsxs(
     "button",
     {
-      className: `flex items-center justify-center h-10 px-5 text-sm gap-2 bg-theme-700 hover:bg-theme-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 backdrop-blur-sm rounded-btn active:scale-[0.98] ${isDisabled ? "cursor-not-allowed" : ""} ${className}`,
+      className: `inline-flex items-center justify-center gap-2 rounded-btn border transition-all duration-200 whitespace-nowrap enabled:active:scale-[0.98] disabled:cursor-not-allowed ${SIZE_CHROME[size]} ${VARIANT_CHROME[variant]} ${className}`,
       ...props,
       disabled: isDisabled,
       children: [
-        loading ? /* @__PURE__ */ jsxs("svg", { className: "animate-spin h-4 w-4 text-current", viewBox: "0 0 24 24", fill: "none", children: [
+        loading ? /* @__PURE__ */ jsxs("svg", { className: `animate-spin h-4 w-4 text-current ${disabledContent}`, viewBox: "0 0 24 24", fill: "none", children: [
           /* @__PURE__ */ jsx("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "3" }),
           /* @__PURE__ */ jsx("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" })
-        ] }) : icon && /* @__PURE__ */ jsx(icon_default, { name: icon, size: 16, className: `text-shadow-sm ${disabledText}` }),
-        text && /* @__PURE__ */ jsx("span", { className: `text-shadow-sm truncate font-semibold uppercase tracking-wide ${disabledText}`, children: text })
+        ] }) : icon && /* @__PURE__ */ jsx(icon_default, { name: icon, size: 16, className: `shrink-0 ${disabledContent}` }),
+        text && /* @__PURE__ */ jsx("span", { className: `truncate font-semibold ${disabledContent}`, children: text })
       ]
     }
   );
@@ -589,7 +600,7 @@ var LogoUpload = ({
               {
                 type: "button",
                 onClick: handleRemove,
-                className: "absolute top-2 right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors",
+                className: "absolute top-2 right-2 w-6 h-6 bg-status-danger rounded-full flex items-center justify-center text-white hover:bg-status-danger/90 transition-colors",
                 "aria-label": "Eliminar logo",
                 children: /* @__PURE__ */ jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", className: "w-4 h-4", children: [
                   /* @__PURE__ */ jsx("path", { d: "M18 6 6 18" }),
@@ -619,7 +630,7 @@ var LogoUpload = ({
         ]
       }
     ),
-    error && /* @__PURE__ */ jsx("p", { className: "text-red-500 text-sm mt-2", children: error })
+    error && /* @__PURE__ */ jsx("p", { className: "text-status-danger text-sm mt-2", children: error })
   ] });
 };
 var logoupload_default = LogoUpload;
@@ -1048,7 +1059,7 @@ var emptystate_default = EmptyState;
 var variantConfig = {
   danger: {
     icon: "Trash2",
-    iconBg: "bg-status-danger/10",
+    iconBg: "bg-ink-primary/10",
     iconColor: "text-status-danger",
     confirmBg: "bg-status-danger hover:bg-status-danger/90"
   },
@@ -1319,7 +1330,7 @@ var ContextMenu = ({ open, position, items, onClose }) => {
           if (item.type === "separator") {
             return /* @__PURE__ */ jsx("div", { className: "h-px bg-edge-subtle/20 my-1 mx-2" }, i);
           }
-          const variantClass = item.variant === "red" ? "text-status-pending hover:text-status-pending/80" : item.variant === "amber" ? "text-status-warn hover:text-status-warn/80" : "text-ink-secondary hover:text-ink-primary";
+          const variantClass = item.variant === "red" ? "text-status-danger hover:text-status-danger/80" : item.variant === "amber" ? "text-status-warn hover:text-status-warn/80" : "text-ink-secondary hover:text-ink-primary";
           return /* @__PURE__ */ jsxs(
             "button",
             {
@@ -1492,7 +1503,7 @@ var colorConfig = {
   default: { bg: "bg-surface-2/40", text: "text-ink-primary", iconBg: "bg-surface-3", iconColor: "text-brand" },
   success: { bg: "bg-status-ok/10", text: "text-status-ok light:text-ink-primary", iconBg: "bg-status-ok/20", iconColor: "text-status-ok" },
   warning: { bg: "bg-status-warn/10", text: "text-status-warn light:text-ink-primary", iconBg: "bg-status-warn/20", iconColor: "text-status-warn" },
-  danger: { bg: "bg-status-pending/10", text: "text-status-pending light:text-ink-primary", iconBg: "bg-status-pending/20", iconColor: "text-status-pending" }
+  danger: { bg: "bg-status-danger/10", text: "text-status-danger light:text-ink-primary", iconBg: "bg-status-danger/20", iconColor: "text-status-danger" }
 };
 var StatCard = ({ label, value, icon, subtitle, color = "default" }) => {
   const cfg = colorConfig[color];
@@ -1914,7 +1925,7 @@ var Toast = ({ toast, onClose }) => {
       case "success":
         return { iconBg: "bg-status-ok/15", text: "text-status-ok", icon: "CircleCheck" };
       case "error":
-        return { iconBg: "bg-status-pending/15", text: "text-status-pending", icon: "CircleX" };
+        return { iconBg: "bg-status-danger/15", text: "text-status-danger", icon: "CircleX" };
       case "warning":
         return { iconBg: "bg-status-warn/15", text: "text-status-warn", icon: "TriangleAlert" };
       default:
@@ -2089,7 +2100,7 @@ var section_default = Accordion;
 var colorStyles = {
   default: "",
   amber: "text-status-warn hover:text-status-warn/80 hover:bg-status-warn/30",
-  red: "text-status-pending hover:text-status-pending/80 hover:bg-status-pending/30"
+  red: "text-status-danger hover:text-status-danger/80 hover:bg-status-danger/30"
 };
 var ToolbarButton = ({
   icon,
@@ -2805,7 +2816,7 @@ function MultiselectToolbar({ state, variant }) {
         "span",
         {
           onClick: checkedIds.size > 0 ? handleBulkDelete : void 0,
-          className: `flex items-center transition-colors ${checkedIds.size > 0 ? "text-status-pending cursor-pointer hover:text-status-pending/80" : "text-ink-disabled cursor-not-allowed"}`,
+          className: `flex items-center transition-colors ${checkedIds.size > 0 ? "text-status-danger cursor-pointer hover:text-status-danger/80" : "text-ink-disabled cursor-not-allowed"}`,
           title: "Eliminar seleccionados",
           children: /* @__PURE__ */ jsx(icon_default, { name: "Trash2", size: 14 })
         }
@@ -3109,7 +3120,7 @@ var statusConfig = {
   detected: { icon: "Sparkles", color: "text-theme-300" },
   linking: { icon: "Link", color: "text-theme-400" },
   done: { icon: "Check", color: "text-status-ok" },
-  error: { icon: "X", color: "text-status-pending" }
+  error: { icon: "X", color: "text-status-danger" }
 };
 var fileIcon = (filename) => {
   const ext = filename.split(".").pop()?.toLowerCase();
@@ -3152,7 +3163,7 @@ function defaultHeaderLabel(items, summary) {
 function StatusLabel({ item, requestLabel, role, labels }) {
   const getLinkingLabel = labels.linkingLabel ?? defaultLinkingLabel;
   const getDetectedLabel = labels.detectedLabel ?? defaultDetectedLabel;
-  if (item.status === "error") return /* @__PURE__ */ jsx("span", { className: "text-xs text-status-pending", children: item.error || "Error" });
+  if (item.status === "error") return /* @__PURE__ */ jsx("span", { className: "text-xs text-status-danger", children: item.error || "Error" });
   if (item.status === "detected") return /* @__PURE__ */ jsx("span", { className: "text-xs text-theme-300 font-medium", children: getDetectedLabel(item.detectedTypes, item.detectedCount) });
   if (item.status === "linking") return /* @__PURE__ */ jsx("span", { className: "text-xs text-theme-400", children: getLinkingLabel(requestLabel, role) });
   if (item.status === "done" && item.detectedTypes.length > 0) return /* @__PURE__ */ jsx("span", { className: "text-xs text-status-ok", children: getDetectedLabel(item.detectedTypes, item.detectedCount) });
@@ -3163,8 +3174,8 @@ function ProgressBar({ item }) {
   const isActive = ["compressing", "uploading", "analyzing"].includes(item.status);
   const isDone = item.status === "done";
   const isError = item.status === "error";
-  const barColor = isError ? "bg-status-pending" : isDone ? "bg-status-ok" : "bg-theme-400";
-  const trackColor = isError ? "bg-status-pending/20" : isDone ? "bg-status-ok/20" : "bg-theme-950/40";
+  const barColor = isError ? "bg-status-danger" : isDone ? "bg-status-ok" : "bg-theme-400";
+  const trackColor = isError ? "bg-status-danger/20" : isDone ? "bg-status-ok/20" : "bg-theme-950/40";
   return /* @__PURE__ */ jsx("div", { className: `h-1 rounded-full overflow-hidden ${trackColor}`, children: /* @__PURE__ */ jsx(
     "div",
     {

@@ -90,7 +90,7 @@ const ContextMenu = ({ open, position, items, onClose }: Props) => {
             return <div key={i} className='h-px bg-edge-subtle/20 my-1 mx-2' />
           }
           const variantClass =
-            item.variant === 'red'   ? 'text-status-pending hover:text-status-pending/80' :
+            item.variant === 'red'   ? 'text-status-danger hover:text-status-danger/80' :
             item.variant === 'amber' ? 'text-status-warn hover:text-status-warn/80'       :
                                        'text-ink-secondary hover:text-ink-primary'
           return (

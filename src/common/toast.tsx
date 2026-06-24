@@ -51,7 +51,7 @@ const Toast = ({ toast, onClose }: ToastProps) => {
       case 'success':
         return { iconBg: 'bg-status-ok/15', text: 'text-status-ok', icon: 'CircleCheck' }
       case 'error':
-        return { iconBg: 'bg-status-pending/15', text: 'text-status-pending', icon: 'CircleX' }
+        return { iconBg: 'bg-status-danger/15', text: 'text-status-danger', icon: 'CircleX' }
       case 'warning':
         return { iconBg: 'bg-status-warn/15', text: 'text-status-warn', icon: 'TriangleAlert' }
       default:

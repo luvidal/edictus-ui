@@ -96,13 +96,19 @@ interface Props$h extends LucideProps {
 }
 declare const Icon: ({ name, ...props }: Props$h) => react_jsx_runtime.JSX.Element;
 
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'link';
+type ButtonSize = 'sm' | 'md';
 interface ButtonProps$1 extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: string;
     text?: string;
     /** Shows inline spinner and disables interaction */
     loading?: boolean;
+    /** Visual style. Default 'primary' (the legacy brand-filled chrome). */
+    variant?: ButtonVariant;
+    /** Height/padding scale. Default 'md' (h-10); 'sm' = h-8. */
+    size?: ButtonSize;
 }
-declare const Button: ({ icon, text, loading, className, ...props }: ButtonProps$1) => react_jsx_runtime.JSX.Element;
+declare const Button: ({ icon, text, loading, variant, size, className, ...props }: ButtonProps$1) => react_jsx_runtime.JSX.Element;
 
 interface Props$g {
     label: string;
