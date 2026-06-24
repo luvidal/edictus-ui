@@ -833,7 +833,7 @@ Skeleton.Card = function SkeletonCard({ variant = "light", compact = false }) {
       ] })
     ] });
   }
-  const wrapper = isLight ? "p-3 rounded-2xl bg-white shadow-sm" : "px-3 py-2.5";
+  const wrapper = isLight ? "p-3 rounded-2xl bg-surface-1 shadow-token-sm" : "px-3 py-2.5";
   return /* @__PURE__ */ jsxs("div", { className: `flex gap-3 ${wrapper}`, children: [
     /* @__PURE__ */ jsx("div", { className: `${shimmer} rounded-full w-10 h-10 flex-shrink-0` }),
     /* @__PURE__ */ jsxs("div", { className: "flex-1 min-w-0 space-y-2 py-0.5", children: [
@@ -860,7 +860,7 @@ Skeleton.FileGrid = function SkeletonFileGrid({ count = 8 }) {
 Skeleton.DocGrid = function SkeletonDocGrid({ count = 6, variant = "light" }) {
   const isLight = variant === "light";
   const shimmer = isLight ? "animate-shimmer" : "animate-shimmer-dark";
-  const card = isLight ? "border-gray-200 bg-white shadow-md" : "border-edge-subtle/15 bg-surface-1";
+  const card = isLight ? "border-edge-subtle/15 bg-surface-1 shadow-token-md" : "border-edge-subtle/15 bg-surface-1";
   return /* @__PURE__ */ jsx("div", { className: "flex flex-wrap gap-8", children: Array.from({ length: count }).map((_, i) => /* @__PURE__ */ jsx("div", { className: "animate-fade-in", style: { animationDelay: `${i * 60}ms` }, children: /* @__PURE__ */ jsxs(
     "div",
     {
@@ -913,9 +913,9 @@ Skeleton.Form = function SkeletonForm({ rows = 4, variant = "light" }) {
 Skeleton.Activity = function SkeletonActivity({ variant = "light" }) {
   const isLight = variant === "light";
   const shimmer = isLight ? "animate-shimmer" : "animate-shimmer-dark";
-  const card = isLight ? "bg-white border-gray-200" : "bg-surface-1 border-edge-subtle/15";
-  const stat = isLight ? "bg-gray-50" : "bg-surface-2";
-  const uploads = isLight ? "bg-white border-gray-200" : "bg-surface-1 border-edge-subtle/15";
+  const card = "bg-surface-1 border-edge-subtle/15";
+  const stat = "bg-surface-2";
+  const uploads = "bg-surface-1 border-edge-subtle/15";
   return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-6 flex-1 animate-fade-in", children: [
     /* @__PURE__ */ jsxs("div", { className: `rounded-xl border ${card} p-4`, children: [
       /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 mb-3", children: [
@@ -948,10 +948,9 @@ Skeleton.Preview = function SkeletonPreview({ variant = "light" }) {
   return /* @__PURE__ */ jsx("div", { className: "absolute inset-0 flex items-center justify-center animate-fade-in", children: /* @__PURE__ */ jsx("div", { className: `${shimmer} rounded-xl w-3/4 h-3/4` }) });
 };
 Skeleton.Table = function SkeletonTable({ rows = 5, variant = "light" }) {
-  const isLight = variant === "light";
-  const outer = isLight ? "border-gray-200" : "border-edge-subtle/20";
-  const inner = isLight ? "border-gray-100" : "border-edge-subtle/10";
-  const shimmer = isLight ? "animate-shimmer" : "animate-shimmer-dark";
+  const outer = "border-edge-subtle/20";
+  const inner = "border-edge-subtle/10";
+  const shimmer = variant === "light" ? "animate-shimmer" : "animate-shimmer-dark";
   return /* @__PURE__ */ jsx("div", { className: `w-full rounded-xl border ${outer} overflow-hidden`, children: Array.from({ length: rows }).map((_, i) => /* @__PURE__ */ jsxs("div", { className: `animate-fade-in flex border-b ${inner} last:border-0`, style: { animationDelay: `${i * 60}ms` }, children: [
     /* @__PURE__ */ jsx("div", { className: "w-1/3 px-3 py-3", children: /* @__PURE__ */ jsx("div", { className: `${shimmer} rounded h-3 w-16` }) }),
     /* @__PURE__ */ jsx("div", { className: "w-2/3 px-3 py-3", children: /* @__PURE__ */ jsx("div", { className: `${shimmer} rounded h-3 w-32` }) })
@@ -1037,8 +1036,8 @@ var EmptyState = ({ title = "Sin elementos", description, className = "", varian
   };
   return /* @__PURE__ */ jsxs("div", { className: `flex flex-col items-center justify-center w-full h-full min-h-48 p-8 ${className}`, children: [
     renderIcon(),
-    /* @__PURE__ */ jsx("p", { className: `font-medium text-sm ${isDark ? "text-white/50" : "text-gray-500"}`, children: title }),
-    description && /* @__PURE__ */ jsx("p", { className: `text-xs mt-1 text-center max-w-xs ${isDark ? "text-white/40" : "text-gray-400"}`, children: description }),
+    /* @__PURE__ */ jsx("p", { className: `font-medium text-sm ${isDark ? "text-white/50" : "text-ink-secondary"}`, children: title }),
+    description && /* @__PURE__ */ jsx("p", { className: `text-xs mt-1 text-center max-w-xs ${isDark ? "text-white/40" : "text-ink-tertiary"}`, children: description }),
     action && /* @__PURE__ */ jsxs(
       "button",
       {
@@ -1628,7 +1627,7 @@ var EditableTitle = ({ value, onChange, className = "" }) => {
         onBlur: handleSave,
         onKeyDown: (e) => e.key === "Enter" && handleSave(),
         onClick: (e) => e.stopPropagation(),
-        className: `font-semibold bg-transparent focus:outline-none focus:ring-0 w-full ${hasCustomColor ? "" : "text-gray-800"} ${className}`,
+        className: `font-semibold bg-transparent focus:outline-none focus:ring-0 w-full ${hasCustomColor ? "" : "text-ink-primary"} ${className}`,
         style: { padding: 0, border: "none" },
         autoFocus: true
       }
@@ -1637,7 +1636,7 @@ var EditableTitle = ({ value, onChange, className = "" }) => {
   return /* @__PURE__ */ jsxs(
     "h3",
     {
-      className: `group/title font-semibold truncate inline-flex items-center gap-1 ${hasCustomColor ? "" : "text-gray-800 hover:text-theme-600"} ${onChange ? "cursor-text" : ""} ${className}`,
+      className: `group/title font-semibold truncate inline-flex items-center gap-1 ${hasCustomColor ? "" : "text-ink-primary hover:text-theme-600"} ${onChange ? "cursor-text" : ""} ${className}`,
       onClick: (e) => {
         e.stopPropagation();
         onChange && setIsEditing(true);
@@ -1645,7 +1644,7 @@ var EditableTitle = ({ value, onChange, className = "" }) => {
       title: onChange ? "Clic para editar" : void 0,
       children: [
         value,
-        onChange && /* @__PURE__ */ jsx(icon_default, { name: "Pencil", size: 12, className: `opacity-0 group-hover/title:opacity-100 transition-opacity flex-shrink-0 ${hasCustomColor ? "text-current" : "text-gray-400"}` })
+        onChange && /* @__PURE__ */ jsx(icon_default, { name: "Pencil", size: 12, className: `opacity-0 group-hover/title:opacity-100 transition-opacity flex-shrink-0 ${hasCustomColor ? "text-current" : "text-ink-tertiary"}` })
       ]
     }
   );
@@ -1656,7 +1655,7 @@ var EmailLink = ({ label, email, onClick, className = "" }) => {
   return /* @__PURE__ */ jsxs(
     "span",
     {
-      className: `group/name inline-flex items-center ${hasCustomColor ? "" : "text-gray-500 hover:text-theme-600"} ${onClick ? "cursor-pointer" : ""} ${className}`,
+      className: `group/name inline-flex items-center ${hasCustomColor ? "" : "text-ink-secondary hover:text-theme-600"} ${onClick ? "cursor-pointer" : ""} ${className}`,
       onClick: (e) => {
         e.stopPropagation();
         onClick?.();
@@ -1665,7 +1664,7 @@ var EmailLink = ({ label, email, onClick, className = "" }) => {
       children: [
         /* @__PURE__ */ jsx("span", { className: `truncate ${email ? "group-hover/name:hidden" : ""}`, children: label }),
         email && /* @__PURE__ */ jsx("span", { className: "hidden group-hover/name:inline truncate", children: email }),
-        onClick && /* @__PURE__ */ jsx(icon_default, { name: "Mail", size: 10, className: `hidden group-hover/name:inline ml-1 flex-shrink-0 ${hasCustomColor ? "text-current" : "text-gray-400"}` })
+        onClick && /* @__PURE__ */ jsx(icon_default, { name: "Mail", size: 10, className: `hidden group-hover/name:inline ml-1 flex-shrink-0 ${hasCustomColor ? "text-current" : "text-ink-tertiary"}` })
       ]
     }
   );
@@ -1985,7 +1984,7 @@ var containerSizes = {
   md: "w-8 h-8",
   lg: "w-10 h-10"
 };
-var DEFAULT_COLORS = { iconBg: "bg-gray-100", text: "text-gray-700" };
+var DEFAULT_COLORS = { iconBg: "bg-surface-2", text: "text-ink-secondary" };
 var SectionIcon = ({
   colors = DEFAULT_COLORS,
   icon,

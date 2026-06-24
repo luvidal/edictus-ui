@@ -29,7 +29,7 @@ Skeleton.Card = function SkeletonCard({ variant = 'light', compact = false }: { 
         )
     }
 
-    const wrapper = isLight ? 'p-3 rounded-2xl bg-white shadow-sm' : 'px-3 py-2.5'
+    const wrapper = isLight ? 'p-3 rounded-2xl bg-surface-1 shadow-token-sm' : 'px-3 py-2.5'
     return (
         <div className={`flex gap-3 ${wrapper}`}>
             <div className={`${shimmer} rounded-full w-10 h-10 flex-shrink-0`} />
@@ -87,7 +87,7 @@ Skeleton.DocGrid = function SkeletonDocGrid({ count = 6, variant = 'light' }: { 
     const isLight = variant === 'light'
     const shimmer = isLight ? 'animate-shimmer' : 'animate-shimmer-dark'
     const card = isLight
-        ? 'border-gray-200 bg-white shadow-md'
+        ? 'border-edge-subtle/15 bg-surface-1 shadow-token-md'
         : 'border-edge-subtle/15 bg-surface-1'
     return (
         <div className="flex flex-wrap gap-8">
@@ -181,9 +181,9 @@ Skeleton.Form = function SkeletonForm({ rows = 4, variant = 'light' }: { rows?: 
 Skeleton.Activity = function SkeletonActivity({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
     const isLight = variant === 'light'
     const shimmer = isLight ? 'animate-shimmer' : 'animate-shimmer-dark'
-    const card = isLight ? 'bg-white border-gray-200' : 'bg-surface-1 border-edge-subtle/15'
-    const stat = isLight ? 'bg-gray-50' : 'bg-surface-2'
-    const uploads = isLight ? 'bg-white border-gray-200' : 'bg-surface-1 border-edge-subtle/15'
+    const card = 'bg-surface-1 border-edge-subtle/15'
+    const stat = 'bg-surface-2'
+    const uploads = 'bg-surface-1 border-edge-subtle/15'
     return (
         <div className="flex flex-col gap-6 flex-1 animate-fade-in">
             {/* Login card */}
@@ -237,10 +237,9 @@ Skeleton.Preview = function SkeletonPreview({ variant = 'light' }: { variant?: '
 
 /** Skeleton matching a key-value table layout */
 Skeleton.Table = function SkeletonTable({ rows = 5, variant = 'light' }: { rows?: number; variant?: 'light' | 'dark' }) {
-    const isLight = variant === 'light'
-    const outer = isLight ? 'border-gray-200' : 'border-edge-subtle/20'
-    const inner = isLight ? 'border-gray-100' : 'border-edge-subtle/10'
-    const shimmer = isLight ? 'animate-shimmer' : 'animate-shimmer-dark'
+    const outer = 'border-edge-subtle/20'
+    const inner = 'border-edge-subtle/10'
+    const shimmer = variant === 'light' ? 'animate-shimmer' : 'animate-shimmer-dark'
     return (
         <div className={`w-full rounded-xl border ${outer} overflow-hidden`}>
             {Array.from({ length: rows }).map((_, i) => (

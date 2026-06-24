@@ -34,7 +34,7 @@ const containerSizes = {
   lg: 'w-10 h-10',
 }
 
-const DEFAULT_COLORS: SectionIconColors = { iconBg: 'bg-gray-100', text: 'text-gray-700' }
+const DEFAULT_COLORS: SectionIconColors = { iconBg: 'bg-surface-2', text: 'text-ink-secondary' }
 
 const SectionIcon = ({
   colors = DEFAULT_COLORS,

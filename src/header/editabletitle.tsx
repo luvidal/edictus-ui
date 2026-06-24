@@ -34,7 +34,7 @@ const EditableTitle = ({ value, onChange, className = '' }: EditableTitleProps) 
                 onBlur={handleSave}
                 onKeyDown={e => e.key === 'Enter' && handleSave()}
                 onClick={e => e.stopPropagation()}
-                className={`font-semibold bg-transparent focus:outline-none focus:ring-0 w-full ${hasCustomColor ? '' : 'text-gray-800'} ${className}`}
+                className={`font-semibold bg-transparent focus:outline-none focus:ring-0 w-full ${hasCustomColor ? '' : 'text-ink-primary'} ${className}`}
                 style={{ padding: 0, border: 'none' }}
                 autoFocus
             />
@@ -43,12 +43,12 @@ const EditableTitle = ({ value, onChange, className = '' }: EditableTitleProps) 
 
     return (
         <h3
-            className={`group/title font-semibold truncate inline-flex items-center gap-1 ${hasCustomColor ? '' : 'text-gray-800 hover:text-theme-600'} ${onChange ? 'cursor-text' : ''} ${className}`}
+            className={`group/title font-semibold truncate inline-flex items-center gap-1 ${hasCustomColor ? '' : 'text-ink-primary hover:text-theme-600'} ${onChange ? 'cursor-text' : ''} ${className}`}
             onClick={e => { e.stopPropagation(); onChange && setIsEditing(true) }}
             title={onChange ? 'Clic para editar' : undefined}
         >
             {value}
-            {onChange && <Icon name='Pencil' size={12} className={`opacity-0 group-hover/title:opacity-100 transition-opacity flex-shrink-0 ${hasCustomColor ? 'text-current' : 'text-gray-400'}`} />}
+            {onChange && <Icon name='Pencil' size={12} className={`opacity-0 group-hover/title:opacity-100 transition-opacity flex-shrink-0 ${hasCustomColor ? 'text-current' : 'text-ink-tertiary'}`} />}
         </h3>
     )
 }

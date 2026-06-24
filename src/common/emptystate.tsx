@@ -80,9 +80,9 @@ const EmptyState = ({ title = 'Sin elementos', description, className = '', vari
         <div className={`flex flex-col items-center justify-center w-full h-full min-h-48 p-8 ${className}`}>
             {renderIcon()}
 
-            <p className={`font-medium text-sm ${isDark ? 'text-white/50' : 'text-gray-500'}`}>{title}</p>
+            <p className={`font-medium text-sm ${isDark ? 'text-white/50' : 'text-ink-secondary'}`}>{title}</p>
             {description && (
-                <p className={`text-xs mt-1 text-center max-w-xs ${isDark ? 'text-white/40' : 'text-gray-400'}`}>{description}</p>
+                <p className={`text-xs mt-1 text-center max-w-xs ${isDark ? 'text-white/40' : 'text-ink-tertiary'}`}>{description}</p>
             )}
             {action && (
                 <button
