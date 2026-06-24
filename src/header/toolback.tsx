@@ -15,7 +15,7 @@ const ToolBack = ({ icon, label = 'Volver', onClick, variant = 'light' }: ToolBa
 
     const variantStyles = variant === 'light'
         ? 'bg-theme-100 hover:bg-theme-200 text-theme-700 hover:text-theme-800'
-        : 'bg-white/10 hover:bg-white/15 text-white/80 hover:text-white'
+        : 'bg-ink-primary/10 hover:bg-ink-primary/20 text-ink-secondary hover:text-ink-primary'
 
     return (
         <button
@@ -34,8 +34,8 @@ const ToolBack = ({ icon, label = 'Volver', onClick, variant = 'light' }: ToolBa
                 rounded-btn
             `}
         >
-            <Icon name='ChevronLeft' size={16} className={variant === 'dark' ? 'icon-shadow-sm' : ''} />
-            <Icon name={icon} size={16} className={variant === 'dark' ? 'icon-shadow-sm' : ''} />
+            <Icon name='ChevronLeft' size={16} />
+            <Icon name={icon} size={16} />
             {hovered && <HoverTooltip label={label} btnRef={btnRef} />}
         </button>
     )

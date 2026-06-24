@@ -1701,7 +1701,7 @@ var hovertooltip_default = HoverTooltip;
 var ToolBack = ({ icon, label = "Volver", onClick, variant = "light" }) => {
   const [hovered, setHovered] = react.useState(false);
   const btnRef = react.useRef(null);
-  const variantStyles = variant === "light" ? "bg-theme-100 hover:bg-theme-200 text-theme-700 hover:text-theme-800" : "bg-white/10 hover:bg-white/15 text-white/80 hover:text-white";
+  const variantStyles = variant === "light" ? "bg-theme-100 hover:bg-theme-200 text-theme-700 hover:text-theme-800" : "bg-ink-primary/10 hover:bg-ink-primary/20 text-ink-secondary hover:text-ink-primary";
   return /* @__PURE__ */ jsxRuntime.jsxs(
     "button",
     {
@@ -1720,8 +1720,8 @@ var ToolBack = ({ icon, label = "Volver", onClick, variant = "light" }) => {
                 rounded-btn
             `,
       children: [
-        /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: "ChevronLeft", size: 16, className: variant === "dark" ? "icon-shadow-sm" : "" }),
-        /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: icon, size: 16, className: variant === "dark" ? "icon-shadow-sm" : "" }),
+        /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: "ChevronLeft", size: 16 }),
+        /* @__PURE__ */ jsxRuntime.jsx(icon_default, { name: icon, size: 16 }),
         hovered && /* @__PURE__ */ jsxRuntime.jsx(hovertooltip_default, { label, btnRef })
       ]
     }
