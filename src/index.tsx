@@ -1,4 +1,4 @@
-// @jogi/ui — UI component library
+// @edictus/ui — UI component library
 
 // ── Hooks & Context ──
 export { useToast, ToastProvider } from './hooks'

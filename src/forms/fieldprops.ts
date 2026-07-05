@@ -1,4 +1,4 @@
-// Shared base contract for every form field in @jogi/ui.
+// Shared base contract for every form field in @edictus/ui.
 // Concrete fields extend this with their value type (string, number, etc.)
 // and any field-specific extras (suffix, step, icon, …).
 export interface FieldProps<T> {

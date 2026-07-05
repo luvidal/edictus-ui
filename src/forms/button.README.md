@@ -1,6 +1,6 @@
 # Button
 
-Primary action button. Consumed via `import { Button } from '@jogi/ui'`.
+Primary action button. Consumed via `import { Button } from '@edictus/ui'`.
 
 ```tsx
 <Button icon="Play" text="Enviar" onClick={submit} disabled={!canSubmit} />
