@@ -1,4 +1,4 @@
-# @jogi/ui
+# @edictus/ui
 
 UI component library extracted from [jogi](../jogi). Provides themed, reusable components: buttons, inputs, selects, modals, accordions, tooltips, skeletons, cards, and more.
 
@@ -99,12 +99,12 @@ uses its host AppShell master/detail layout; `Scroll` remains exported directly.
 
 ```ts
 // jogi/tailwind.config.ts — content array
-'./node_modules/@jogi/ui/dist/**/*.{js,mjs}'
+'./node_modules/@edictus/ui/dist/**/*.{js,mjs}'
 ```
 
 ```json
 // jogi/package.json — dependencies
-"@jogi/ui": "github:luvidal/jogi-ui"
+"@edictus/ui": "github:luvidal/edictus-ui#<40-char-sha>"
 ```
 
 ## Key Behaviors
